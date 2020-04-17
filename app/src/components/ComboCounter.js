@@ -16,23 +16,68 @@ class ComboCounter extends React.Component
 
     animateSpeed = 180;
 
-    handleRemoveDrinkClick = (e) => {
+    componentWillMount()
+    {
+        window.addEventListener('keyup', this.onGlobalKeyPress);
+    }
 
+    onGlobalKeyPress = (e) => {
+
+        switch(e.which)
+        {
+            case 107 : //plus
+                this.addDrink();
+                break;
+            case 109 : //minus
+                this.removeDrink();
+                break;
+            case 106 : //multiply / asterisk (to clear)
+                this.clearDrinks();
+                break;
+
+            default : break;
+        }
+    }
+
+    addDrink = () => {
+
+        if(this.state.count < this.maxCombo)
+        {
+            this.setState({
+                count : this.state.count + 1,
+            });
+        }
+    }
+
+    removeDrink = () =>
+    {
         if(this.state.count > 0)
         {
             this.setState({
                 count : this.state.count - 1
             });
+        }
+    }
 
+    clearDrinks = () => {
+
+        this.setState({
+            count : 0
+        });
+    }
+
+    handleRemoveDrinkClick = (e) => {
+
+        if(this.state.count > 0)
+        {
+            this.removeDrink();    
             this.animateCount();
         }
     }
 
     handleClearDrinksClick = (e) => {
 
-        this.setState({
-            count : 0
-        });
+        this.clearDrinks();
     }
 
     animateCount = () => {
@@ -53,9 +98,7 @@ class ComboCounter extends React.Component
 
         if(this.state.count < this.maxCombo)
         {
-            this.setState({
-                count : this.state.count + 1,
-            });
+            this.addDrink();
     
             this.animateCount();
         }
