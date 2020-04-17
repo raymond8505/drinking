@@ -8,7 +8,8 @@ class ComboCounter extends React.Component
 
     state = {
         count : 0,
-        animating : false
+        animating : false,
+        open : true
     }
 
     maxCombo = 10;
@@ -68,10 +69,22 @@ class ComboCounter extends React.Component
         return ((this.state.count / this.maxCombo) * 100) + '%';
     }
 
+    handleToggleClick = (e) => {
+
+        this.setState({
+            open : !this.state.open
+        })
+    }
+
     render()
     {
         return (
-            <aside className={`ComboCounter${this.state.animating ? ' ComboCounter--animating' : ' ComboCounter--animated'}${this.state.count === this.maxCombo ? ' ComboCounter--full' : ''}${this.state.count === 0 ? ' ComboCounter--empty' : ''}`}>
+            <aside className={`ComboCounter${this.state.animating ? ' ComboCounter--animating' : ' ComboCounter--animated'}${this.state.count === this.maxCombo ? ' ComboCounter--full' : ''}${this.state.count === 0 ? ' ComboCounter--empty' : ''}${this.state.open ? ' ComboCounter--open' : ' ComboCounter--closed'}`}>
+                
+                <button className="ComboCounter__toggle-btn ComboCounter__toggle-btn--open" onClick={this.handleToggleClick}>
+                    <i className="fa fa-chevron-left"></i>
+                </button>
+                
                 <div className="ComboCounter__count">
                     {this.state.count}
                 </div>
@@ -89,6 +102,11 @@ class ComboCounter extends React.Component
                 </div>
                 
                 <button className="ComboCounter__add-drink-btn" onClick={this.handleAddDrinkClick}>+</button>
+
+                <button className="ComboCounter__toggle-btn ComboCounter__toggle-btn--close" onClick={this.handleToggleClick}>
+                    <i className="fa fa-chevron-right"></i>
+                </button>
+
             </aside>);
     }
 }

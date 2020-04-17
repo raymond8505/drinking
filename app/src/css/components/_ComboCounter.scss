@@ -1,16 +1,31 @@
 .ComboCounter
 {
+    @include animated($speed : .3s);
     position: fixed;
-    right: 3em;
-    top: 3em;
+    right: 2.5em;
+    top: 2em;
+    padding: .5em;
     z-index: 99;
     display: flex;
     justify-content: flex-end;
+    align-items: center;
+    background: $background_light;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    //width: 15.2rem;
+
+    > *
+    {
+        margin-left: 1rem;
+    }
+}
+.ComboCounter--closed
+{
+    transform: translateX(100%);
 }
 .ComboCounter__shot-glass
 {
     clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 100%);
-    background: rgba(black,.05);
+    background: rgba(black,.1);
     height: 50px;
     width: 50px;
     position: relative;
@@ -73,7 +88,7 @@
 {
     font-size: 3.5rem;
     font-weight: bold;
-    margin-right: 1rem;
+    
     line-height: 1;
     @include animated;
     transform: translateX(100%);
@@ -84,8 +99,32 @@
         transform: translateX(0);
         opacity: 1;
     }
+
+    .ComboCounter--full &
+    {
+        animation: blink .3s linear 3;
+        animation-delay: .35s;
+	}
 }
 .ComboCounter--empty .ComboCounter__count
 {
     opacity: 0;
+}
+.ComboCounter__toggle-btn--open
+{
+    opacity: 0;
+    pointer-events: none;
+
+    .ComboCounter--closed &
+    {
+        opacity: 1;
+        pointer-events: all;
+    }
+}
+.ComboCounter__toggle-btn
+{
+    @include no-button-style;
+    font-size: 1rem;
+    padding: 0;
+    color: $color;
 }
