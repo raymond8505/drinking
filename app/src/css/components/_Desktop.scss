@@ -1,0 +1,41 @@
+.Desktop
+{
+    display: flex;
+    align-items: stretch;
+    height: calc(100vh - 1.93em);
+    background-color: --color;
+    .Game
+    {
+        width: 80%;
+        margin-left: 1vw;
+        padding-left: 1vw;
+        border-left: 1px solid $color;
+    }
+
+    .Game,.Games
+    {
+        padding: 1vw;
+        overflow-y: auto;
+    }
+
+    .Games
+    {
+        width: 20%;
+    }
+
+    @media (min-width: $phone_width)
+        {
+            @media (max-width: 1300px)
+            {
+                .Game
+                {
+                    width: 75%;
+                }
+
+                .Games
+                {
+                    width: 25%;
+                }
+            }
+        }
+}

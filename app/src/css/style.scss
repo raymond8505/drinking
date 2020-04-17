@@ -1,0 +1,117 @@
+@import url(https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
+
+@import "variables";
+
+@import "../../../../common/scss-lib/bourbon/bourbon";
+@import "../../../../common/scss-lib/framework/framework";
+
+body,html
+{
+    font-family: Roboto, Helvetica, SanFransisco, Arial, _sans;
+    font-size: 16px;
+    color: $color;
+    background-color: $background;
+}
+
+table
+{
+    td,th
+    {
+        padding: .2em .4em;
+    }
+
+    tr:nth-child(even)
+    {
+        background: rgba($color,.1);
+    }
+
+    thead
+    {
+        background: rgba($color,.2);
+    }
+}
+
+a
+{
+    @include default_link_color($accent,darkgreen);
+    @include animated(color);
+}
+
+.editable
+{
+    border: none;
+    border-radius: 0;
+    border-bottom: 2px solid transparent;
+    background: transparent;
+
+    &:not([disabled])
+    {
+        border-bottom-color: $color;
+        font-weight: bold;
+    }
+}
+
+button,
+.button-link
+{
+    //border: 1px solid #999;
+    padding: .3em .8em;
+    border-radius: 2px;
+    background: $accent;
+    color: #fff;
+    @include animated;
+
+    &:hover
+    {
+        background: $background;
+        color: $color;
+    }
+}
+.button-link
+{
+    display: inline-block;
+    text-decoration: none !important;
+    color: $color !important;
+}
+
+.link-btn,
+.link-button
+{
+    @include no-button-style;
+    text-decoration: underline;
+    color: $color;
+    background: transparent !important;
+}
+
+
+
+
+@media (max-width: $phone_width)
+{
+    a
+    {
+        display: inline-block;
+        padding: .2em .6em;
+        background: #ddd;
+        color: $color !important;
+        text-decoration: none;
+    }
+}
+
+@import "components/App";
+@import "components/GameListItem";
+@import "components/GameList";
+@import "components/EditButton";
+@import "components/DeleteButton";
+@import "components/RulesList";
+@import "components/AddRulesForm";
+@import "components/Game";
+@import "components/Desktop";
+@import "components/Games";
+@import "components/RuleRow";
+@import "components/Loader";
+@import "components/Login";
+@import "components/Alert";
+@import "components/Signup";
+@import "components/AddGameForm";
+@import "components/ComboCounter";

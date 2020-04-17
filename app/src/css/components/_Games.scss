@@ -1,0 +1,29 @@
+.Games .Games__add-a-game
+{
+    margin-top: 2em;
+    border-top: 1px solid $color;
+    padding-top: 1em;
+    position: sticky;
+    bottom: 0;
+    background: white;
+    padding-bottom: 1em;
+}
+.Games
+{
+    
+
+    display: flex; 
+    //flex-wrap: wrap;
+    flex-direction: column;
+
+    > .GameList
+    {
+        flex-grow: 1;
+        flex-shrink: 1;
+        overflow-y: auto;
+    }
+}
+.Desktop .Games
+{
+    @include padding((right,bottom),0);
+}

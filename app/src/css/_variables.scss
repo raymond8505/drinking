@@ -1,0 +1,22 @@
+$color : #111;
+
+$background : #efefef;
+
+$background_light : #fff;
+
+$accent : darkslateblue;
+
+$green : green; //this could change eventually
+
+$red : red;
+
+$dark_grey : #333;
+
+$phone_width : 1000px;
+
+@media (prefers-color-scheme: dark) {
+    :root
+    {
+        --color : red;
+    }
+}

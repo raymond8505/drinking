@@ -1,0 +1,15 @@
+.EditButton__icon
+{
+    color: $green;
+    @include iconify($fa-var-pencil);
+
+    .EditButton--confirm &
+    {
+        @include iconify($fa-var-check);
+    }
+}
+.EditButton
+{
+    @include no-button-style;
+    cursor: pointer;
+}

@@ -1,0 +1,33 @@
+.Signup
+{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.Signup__form
+{
+    padding: 2em;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+
+    input
+    {
+        margin-bottom: 1em;
+        border : none;
+        border-bottom: 2px solid $color;
+    }
+
+    input,button
+    {
+        font-size: 1.5em;
+    }
+
+    .Signup__signup
+    {
+        font-size: 1em;
+    }
+}

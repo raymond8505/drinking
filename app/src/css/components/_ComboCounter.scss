@@ -1,0 +1,66 @@
+.ComboCounter
+{
+    position: fixed;
+    right: 3em;
+    top: 3em;
+    z-index: 99;
+    display: flex;
+    justify-content: flex-end;
+}
+.ComboCounter__shot-glass
+{
+    clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 100%);
+    background: rgba(black,.05);
+    height: 50px;
+    width: 50px;
+    position: relative;
+}
+.ComboCounter__shot-volume
+{
+    background: linear-gradient(0deg, $accent 70%, rgba(0,0,0,0) 100%);
+    height: 33%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    @include animated($speed: .1s);
+}
+.ComboCounter__add-drink-btn
+{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: $green;
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 0;
+
+    &:hover
+    {
+        background: darken($green,2%);
+        color: #fff;
+    }
+}
+.ComboCounter__remove-drink-btn,
+.ComboCounter__clear-drinks-btn
+{
+    @include no-button-style;
+    color: $color;
+    background: transparent;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 1.25em;
+    padding: 0;
+    margin: 0 .15em;
+
+    &:hover
+    {
+        background: transparent;
+        color: darken($color,2%);
+    }
+}
+.ComboCounter__button-shell
+{
+    text-align: center;
+}

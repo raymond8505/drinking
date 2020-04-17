@@ -1,0 +1,16 @@
+.DeleteButton__icon
+{
+    color: $red;
+    @include iconify($fa-var-close);
+
+    /* .DeleteButton--confirm &
+    {
+        @include iconify($fa-var-close);
+        color: $dark_grey;
+    } */
+}
+.DeleteButton
+{
+    @include no-button-style;
+    cursor: pointer;
+}

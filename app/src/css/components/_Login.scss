@@ -1,0 +1,49 @@
+.Login
+{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .Alert
+    {
+        margin-bottom: 1em;
+    }
+}
+.Login__form
+{
+    padding: 2em;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    width: 25em;
+
+    @media (max-width: $phone_width)
+    {
+        width: 100%;
+        border: none;
+        padding: 1em;
+    }
+    input
+    {
+        margin-bottom: 1em;
+        border : none;
+        border-bottom: 2px solid $color;
+    }
+
+    input,button
+    {
+        font-size: 1.5em;
+    }
+
+    .Login__signup
+    {
+        font-size: 1em;
+    }
+}
+.Login__signup 
+{
+    text-align: center;
+}

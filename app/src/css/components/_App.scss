@@ -1,0 +1,26 @@
+@media (min-width: $phone_width)
+{
+    .App__home-link
+    {
+        display: none;
+    }
+}
+.App__header
+{
+    display: flex;
+    justify-content: space-between;
+    @include padding(horizontal,1em);
+}
+.App--mobile
+{
+    padding-top: 1.81rem;
+
+    .App__header
+    {
+        width: 100%;
+        background: white;
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+}

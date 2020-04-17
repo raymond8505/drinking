@@ -1,0 +1,24 @@
+.Alert
+{
+    border: 2px solid transparent;
+    padding: 1em;
+    font-weight: bold;
+}
+.Alert--error
+{
+    border-color: red;
+    color: red;
+    background: rgba(red,.1);
+}
+.Alert--info
+{
+    border-color: darkgoldenrod;
+    color: darkgoldenrod;
+    background-color: rgba(darkgoldenrod,.1);
+}
+.Alert--success
+{
+    border-color: green;
+    color: green;
+    background-color: rgba(green,.1);
+}

@@ -1,0 +1,43 @@
+input.RuleRow__title-field
+{
+    width: 100%;
+}
+.App--mobile
+{
+    .RuleRow__game-cell,
+    .RuleRow__owner-cell
+    {
+        display: none;
+    }
+    .RuleRow__rule-cell
+    {
+        font-size: .9em;
+    }
+}
+.RuleRow__controls-cell
+{
+    text-align: right;
+    transition: opacity .1s ease-in-out;
+    
+    @media (min-width: $phone_width)
+    {
+        button
+        {
+            pointer-events: none;
+        }
+
+    
+        opacity: 0;
+
+        tr:hover &
+        {
+            opacity: 1;
+
+            button
+            {
+                pointer-events: all;
+            }
+        }
+    }
+    
+}

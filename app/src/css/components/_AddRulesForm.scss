@@ -1,0 +1,16 @@
+.AddRulesForm__drinks-field,
+.AddRulesForm__rule-field
+{
+    border: none;
+    border-bottom: 2px solid $color;
+    width: 100%;
+    
+    @media (max-width: 500px)
+    {
+        width: calc(100% - 2px);
+    }
+}
+.AddRulesForm > *:not(:last-child)
+{
+    margin-bottom: .5em;
+}

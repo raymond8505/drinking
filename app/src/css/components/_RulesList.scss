@@ -1,0 +1,65 @@
+.RulesList table
+{
+    width: 100%;
+
+    td,th
+    {
+        text-align: left;
+    }
+}
+.RulesList__header th
+{
+    position: sticky;
+    top: 2em;
+    background-color: white;
+    border-bottom: 2px solid $color;
+
+    .App--mobile &
+    {
+        top: 5.3em;
+    }
+}
+.RulesList__header
+{
+    position: sticky;
+    top: -1.1875em;
+    background: white;
+    padding: .5em;
+
+    .App--mobile &
+    {
+        top: 1.81rem;
+    }
+}
+.RulesList__filter-field
+{
+    width: 100%;
+    font-size: 1.5em;
+    padding: .2em .4em;
+    border: none;
+    border-bottom: 1px solid $color;
+    
+}
+
+.App--mobile
+{
+    .RulesList
+    {
+        font-size: .95em;
+    }
+    .RulesList__game-cell,
+    .RulesList__owner-cell
+    {
+        display: none;
+    }
+    .RulesList__rule-cell
+    {
+        font-size: .9em;
+    }
+}
+.RulesList__sort-direction
+{
+    font-size: .5em;
+    display: inline-block;
+    transform: translateY(-50%);
+}
