@@ -23,7 +23,12 @@
     position: absolute;
     left: 0;
     bottom: 0;
-    @include animated($speed: .1s);
+    @include animated($speed: .1s,$easing : linear);
+
+    .ComboCounter--full &
+    {
+        background: $accent;
+    }
 }
 .ComboCounter__add-drink-btn
 {
@@ -63,4 +68,24 @@
 .ComboCounter__button-shell
 {
     text-align: center;
+}
+.ComboCounter__count
+{
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin-right: 1rem;
+    line-height: 1;
+    @include animated;
+    transform: translateX(100%);
+    opacity: 0;
+
+    .ComboCounter--animated &
+    {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+.ComboCounter--empty .ComboCounter__count
+{
+    opacity: 0;
 }

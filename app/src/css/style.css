@@ -1671,7 +1671,9 @@ input.RuleRow__title-field {
   position: absolute;
   left: 0;
   bottom: 0;
-  transition: all 0.1s ease-in-out 0s; }
+  transition: all 0.1s linear 0s; }
+  .ComboCounter--full .ComboCounter__shot-volume {
+    background: darkslateblue; }
 
 .ComboCounter__add-drink-btn {
   width: 50px;
@@ -1706,3 +1708,18 @@ input.RuleRow__title-field {
 
 .ComboCounter__button-shell {
   text-align: center; }
+
+.ComboCounter__count {
+  font-size: 3.5rem;
+  font-weight: bold;
+  margin-right: 1rem;
+  line-height: 1;
+  transition: all 0.2s ease-in-out 0s;
+  transform: translateX(100%);
+  opacity: 0; }
+  .ComboCounter--animated .ComboCounter__count {
+    transform: translateX(0);
+    opacity: 1; }
+
+.ComboCounter--empty .ComboCounter__count {
+  opacity: 0; }
