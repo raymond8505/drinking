@@ -57,6 +57,8 @@ class Desktop extends React.Component
                             copyGame={this.props.copyGame}
                             userLoggedIn={this.props.userLoggedIn}
                             getUser={this.props.getUser}
+                            setSessionCombo={this.props.setSessionCombo}
+                            currentComboCount={this.props.currentComboCount}
                              /> 
                         : <Alert tag="div" type="info">Choose a game from the left hand menu</Alert>}
             </main>);

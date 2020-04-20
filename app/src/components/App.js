@@ -10,6 +10,7 @@ import Login from './Login';
 import firebase from 'firebase';
 import base from '../base';
 import Signup from './Signup';
+import SessionManager from './SessionManager';
 import {Link,withRouter} from 'react-router-dom';
 
 class App extends React.Component
@@ -22,10 +23,14 @@ class App extends React.Component
         loading : true,
         signupError : null,
         loginError : null,
-        loggingIn : false
+        loggingIn : false,
+        currentSession : undefined,
+        sessions : {},
     }
 
     RAYMOND_UID = 'uGqTXpxQHzg4K7DRhObVWvValvF3';
+
+    sessionKeyLength = 4;
     
     editGame = (key,game) => {
         
@@ -34,6 +39,106 @@ class App extends React.Component
         games[key] = game;
 
         this.setState({games});
+    }
+
+    getCurrentSessionComboCount = () => {
+        return this.inASession() ? this.state.sessions[this.state.currentSession].currentComboCount : 0;
+    }
+
+    setSession = (key) => {
+
+        let session = {
+            created : new Date().getTime(),
+            currentComboCount : 0
+        };
+
+        let sessions = {...this.state.sessions};
+
+        sessions[key] = session;
+
+        this.setState({currentSession : key});
+
+        console.log('setting session local only');
+
+        this.setState({sessions : sessions});
+    }
+
+    inASession = () => {
+        return this.state.currentSession !== undefined;
+    }
+
+    setSessionCombo = (count) => {
+
+        if(this.inASession())
+        {
+            let sessions = {...this.state.sessions};
+                sessions[this.state.currentSession].currentComboCount = count;
+            
+            this.setState({sessions});
+        }
+    }
+
+    joinSession = (key) => {
+        
+        key = key.toUpperCase();
+
+        if(this.sessionKeyExists(key))
+        {
+            this.setState({currentSession : key});
+            return true;
+        }
+        else
+        {
+            console.log(key,this.state.sessions);
+
+            alert(`No session with the code "${key}" currently exists.`);
+            return false;
+        }
+    }
+
+    leaveSession = () => {
+        this.setState({currentSession : undefined});
+    }
+
+    sessionKeyExists = (key) => {
+        return this.state.sessions[key] !== undefined
+    }
+
+    generateSessionKey = () => {
+
+        let key = '';
+        let code;
+
+        for(let i = 0; i < this.sessionKeyLength; i++)
+        {
+            code = Math.round(Math.random() * 25) + 65;
+
+            //console.log(code,key);
+            key += String.fromCharCode(code);    
+        }
+
+        return key.toUpperCase();
+    }
+
+    generateUniqueSessionKey = () => {
+        let key = this.generateSessionKey();
+
+        do
+        {
+            key = this.generateSessionKey();
+        }
+        while(this.state.sessions[key] !== undefined);
+        
+        return key;
+    }
+
+    createSession = () => {
+
+        let key = this.generateUniqueSessionKey();
+
+        this.setSession(key);
+
+        return key;
     }
 
     componentWillUpdate()
@@ -50,6 +155,10 @@ class App extends React.Component
         this.fbRefU = base.syncState(`drinking-games/${db}/users`,{
             context : this,
             state : 'users'});
+
+        this.fbRefSessions = base.syncState(`drinking-games/${db}/sessions`,{
+            context : this,
+            state : 'sessions'});
 
         //base.listenTo('drinking-games/games',)
         this.fbRef = base.syncState(`drinking-games/${db}/games`,{
@@ -502,7 +611,8 @@ class App extends React.Component
                             canDeleteGame={this.canDeleteGame}
                             canDeleteRule={this.canDeleteRule}
                             userLoggedIn={this.userLoggedIn}
-                            getUser={this.getUser} />;
+                            getUser={this.getUser}
+                            setSessionCombo={this.setSessionCombo} />;
                     break;
                 case 'signup' :
                     view = <Signup error={this.state.signupError} signup={this.signup} />;
@@ -536,7 +646,9 @@ class App extends React.Component
                     canDeleteGame={this.canDeleteGame}
                     canDeleteRule={this.canDeleteRule}
                     userLoggedIn={this.userLoggedIn}
-                    getUser={this.getUser} />
+                    getUser={this.getUser}
+                    setSessionCombo={this.setSessionCombo}
+                    currentComboCount={this.getCurrentSessionComboCount()} />
             }
             
         }
@@ -551,9 +663,17 @@ class App extends React.Component
                         <Link to="/" className="App__home-link">Home</Link>
                         {this.renderAuthButton()}
                     </span>
+
+                    <SessionManager
+                        createSession={this.createSession}
+                        leaveSession={this.leaveSession}
+                        joinSession={this.joinSession}
+                        currentSession={this.state.currentSession}
+                    />
                     
                     <span className="App__current-user">
-                        {this.state.user.email} | {this.state.user.uid}
+                        
+                        {this.state.user.email}
                     </span>
                 </header>
                 {view}

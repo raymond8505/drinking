@@ -41,34 +41,32 @@ class ComboCounter extends React.Component
 
     addDrink = () => {
 
-        if(this.state.count < this.maxCombo)
+        if(this.props.count < this.maxCombo)
         {
-            this.setState({
-                count : this.state.count + 1,
-            });
+            let count = this.props.count + 1;
+
+            this.props.setSessionCombo(count);
+            
         }
     }
 
     removeDrink = () =>
     {
-        if(this.state.count > 0)
+        if(this.props.count > 0)
         {
-            this.setState({
-                count : this.state.count - 1
-            });
+            this.props.setSessionCombo(this.props.count - 1);
         }
     }
 
     clearDrinks = () => {
 
-        this.setState({
-            count : 0
-        });
+        this.props.setSessionCombo(0);
+        
     }
 
     handleRemoveDrinkClick = (e) => {
 
-        if(this.state.count > 0)
+        if(this.props.count > 0)
         {
             this.removeDrink();    
             this.animateCount();
@@ -96,7 +94,7 @@ class ComboCounter extends React.Component
 
     handleAddDrinkClick = (e) => {
 
-        if(this.state.count < this.maxCombo)
+        if(this.props.count < this.maxCombo)
         {
             this.addDrink();
     
@@ -107,9 +105,9 @@ class ComboCounter extends React.Component
 
     calcShotHeight = () => {
         
-        if(this.state.count === 0) return 0;
+        if(this.props.count === 0) return 0;
 
-        return ((this.state.count / this.maxCombo) * 100) + '%';
+        return ((this.props.count / this.maxCombo) * 100) + '%';
     }
 
     handleToggleClick = (e) => {
@@ -119,17 +117,18 @@ class ComboCounter extends React.Component
         })
     }
 
+
     render()
     {
         return (
-            <aside className={`ComboCounter${this.state.animating ? ' ComboCounter--animating' : ' ComboCounter--animated'}${this.state.count === this.maxCombo ? ' ComboCounter--full' : ''}${this.state.count === 0 ? ' ComboCounter--empty' : ''}${this.state.open ? ' ComboCounter--open' : ' ComboCounter--closed'}`}>
+            <aside className={`ComboCounter${this.state.animating ? ' ComboCounter--animating' : ' ComboCounter--animated'}${this.props.count === this.maxCombo ? ' ComboCounter--full' : ''}${this.props.count === 0 ? ' ComboCounter--empty' : ''}${this.state.open ? ' ComboCounter--open' : ' ComboCounter--closed'}`}>
                 
                 <button className="ComboCounter__toggle-btn ComboCounter__toggle-btn--open" onClick={this.handleToggleClick}>
                     <i className="fa fa-chevron-left"></i>
                 </button>
                 
                 <div className="ComboCounter__count">
-                    {this.state.count}
+                    {this.props.count}
                 </div>
 
                 <div class="ComboCounter__glass-wrap">

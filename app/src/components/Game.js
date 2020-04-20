@@ -136,8 +136,8 @@ class Game extends React.Component
         changePageTitle(game.title + ' | Drinking Games'); 
         
         return (
-            <div className="Game"  ref={this.shell}>
-                <ComboCounter />
+            <div className="Game" ref={this.shell}>
+                <ComboCounter setSessionCombo={this.props.setSessionCombo} count={this.props.currentComboCount} />
                 {this.renderBreadCrumbs()}
                 <h1 className="Game__title">
                     <input 

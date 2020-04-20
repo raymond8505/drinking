@@ -1479,7 +1479,7 @@ span.GameListItem__title {
 .Desktop {
   display: flex;
   align-items: stretch;
-  height: calc(100vh - 1.93em);
+  height: calc(100vh - 2em);
   background-color: --color; }
   .Desktop .Game {
     width: 80%;
@@ -1759,3 +1759,8 @@ input.RuleRow__title-field {
   font-size: 1rem;
   padding: 0;
   color: #111; }
+
+.SeassionManager__session-key {
+  margin-right: 1em;
+  font-size: 1.3em;
+  font-weight: bold; }
