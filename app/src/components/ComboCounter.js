@@ -23,6 +23,10 @@ class ComboCounter extends React.Component
 
     onGlobalKeyPress = (e) => {
 
+        let targetTag = e.target.tagName.toLowerCase();
+
+        if(targetTag == 'input' || targetTag == 'textarea' || targetTag == 'select') return;
+
         switch(e.which)
         {
             case 107 : //plus

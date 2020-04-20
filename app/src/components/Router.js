@@ -10,6 +10,7 @@ class Router extends React.Component
         return (
             <BrowserRouter>
                 <Switch>
+                    <Route path="/join/:key" render={(props) => <App {...props} mode="join" />} />
                     <Route path="/game/:ID" render={(props) => <App {...props} mode="game" />} />
                     <Route exact path="/signup" render={(props) => <App {...props} mode="signup" />} />
                     <Route exact path="/" render={(props) => <App {...props} mode="games" />} />

@@ -1,0 +1,61 @@
+.ShortcutsModal
+{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background: rgba($background,.9);
+    z-index: 999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+.ShortcutsModal--open
+{
+    display: flex;
+}
+.ShortcutsModal__dialog
+{
+    width: 50vw;
+    height: 75vh;
+    background-color: $background;
+    border-radius: 2px;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+}
+.ShortcutsModal__dialog-header
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 1em;
+}
+.ShortcutsModal__body
+{
+    padding: 1.5em;
+    line-height: 1.1;
+}
+.ShortcutsModal__shortcut-keys
+{
+    font-weight: $fw_black;
+    font-size: 1.5em;
+}
+.ShortcutsModal__shortcuts
+{
+    margin: 0;
+    column-count: 2;
+    &,li
+    {
+        display: block;
+        padding: 0;
+    }
+}
+.ShortcutsModal__shortcut
+{
+    margin-bottom: .75em;
+    
+}
+.ShortcutsModal__shortcut-description
+{
+    color: lighten($color,15%);
+}

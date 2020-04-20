@@ -12,6 +12,7 @@ import base from '../base';
 import Signup from './Signup';
 import SessionManager from './SessionManager';
 import {Link,withRouter} from 'react-router-dom';
+import ShortCutsModal from './ShortCutsModal';
 
 class App extends React.Component
 {
@@ -31,6 +32,10 @@ class App extends React.Component
     RAYMOND_UID = 'uGqTXpxQHzg4K7DRhObVWvValvF3';
 
     sessionKeyLength = 4;
+
+    sessionLife = 1000 * 60 * 60 * 24;//24 hours
+
+    shortCutsModal = React.createRef();
     
     editGame = (key,game) => {
         
@@ -53,6 +58,7 @@ class App extends React.Component
         };
 
         let sessions = {...this.state.sessions};
+            sessions = this.pruneSessions(sessions);
 
         sessions[key] = session;
 
@@ -76,6 +82,26 @@ class App extends React.Component
             
             this.setState({sessions});
         }
+    }
+
+    pruneSessions = (sessions) => {
+
+        let now = new Date().getTime();
+
+        this.data.forEach((key) => {
+
+            let session = sessions[key];
+
+            if(now - session.created >= this.sessionLife)
+            {
+                sessions[key] = undefined;
+            }
+
+        },sessions);
+
+        console.log(sessions);
+
+        return sessions;
     }
 
     joinSession = (key) => {
@@ -543,6 +569,10 @@ class App extends React.Component
         }
     }
 
+    showShortcuts = () => {
+        this.shortCutsModal.current.show();
+    }
+
     render()
     {
         this.data = new DataHelper(this.state.games);
@@ -574,6 +604,15 @@ class App extends React.Component
         {
             switch(this.props.mode)
             {
+                case 'join' :
+                    let key = this.props.match.params.key;
+                    
+                    if(this.joinSession(key))
+                    {
+                        this.props.history.push('/');
+                    }
+                    
+                    break;
                 case 'games' :
                     view = <Games 
                         games={this.state.games} 
@@ -628,7 +667,15 @@ class App extends React.Component
                 case 'signup' :
                     view = <Signup signup={this.signup} error={this.state.signupError} />;
                     break;
+                case 'join' :
+                    let key = this.props.match.params.key;
+
+                    if(this.joinSession(key))
+                    {
+                        this.props.history.push('/');
+                    }
                     
+                    break;
                 default :
                     view = <Desktop 
                     games={this.state.games} 
@@ -675,8 +722,13 @@ class App extends React.Component
                         
                         {this.state.user.email}
                     </span>
+
+                    <button class="App__shortcuts-ref" onClick={this.showShortcuts}>
+                        <i class="fa fa-keyboard-o"></i>
+                    </button>
                 </header>
                 {view}
+                <ShortCutsModal ref={this.shortCutsModal} />
             </div>
             );
     }

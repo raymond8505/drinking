@@ -42,7 +42,7 @@ class SessionManager extends React.Component
         else
         {
             return <div className="SessionManager__current-session">
-                <span className="SeassionManager__session-key">{this.state.currentSession}</span>
+                <a title="Copy this link address and send to people you want to join the session" href={`/join/${this.state.currentSession}`} className="SeassionManager__session-key">{this.state.currentSession}</a>
                 <button className="SessionManager__leave-session-btn" onClick={this.leaveSession}>Leave Session</button>
             </div>;
         }
