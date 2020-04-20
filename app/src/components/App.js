@@ -62,11 +62,12 @@ class App extends React.Component
 
         sessions[key] = session;
 
-        this.setState({currentSession : key});
-
-        console.log('setting session local only');
-
         this.setState({sessions : sessions});
+
+        setTimeout(() => {
+            this.joinSession(key);
+        }, 10);
+        
     }
 
     inASession = () => {
@@ -111,11 +112,14 @@ class App extends React.Component
         if(this.sessionKeyExists(key))
         {
             this.setState({currentSession : key});
+
+            window.sessionStorage.setItem('currentSession',key);
+
             return true;
         }
         else
         {
-            console.log(key,this.state.sessions);
+            //console.log(key,this.state.sessions);
 
             alert(`No session with the code "${key}" currently exists.`);
             return false;
@@ -124,6 +128,7 @@ class App extends React.Component
 
     leaveSession = () => {
         this.setState({currentSession : undefined});
+        window.sessionStorage.removeItem('currentSession');
     }
 
     sessionKeyExists = (key) => {
@@ -174,7 +179,6 @@ class App extends React.Component
 
     componentDidMount()
     {
-        
         let db = window.location.hostname === 'localhost' ? 'dev' : 'live';
         
         //console.log(db);
@@ -184,7 +188,15 @@ class App extends React.Component
 
         this.fbRefSessions = base.syncState(`drinking-games/${db}/sessions`,{
             context : this,
-            state : 'sessions'});
+            state : 'sessions',
+            then : (t) => {
+                let ssKey = window.sessionStorage.getItem('currentSession');
+        
+                if(ssKey && !this.inASession())
+                {
+                    this.joinSession(ssKey);
+                }
+            }});
 
         //base.listenTo('drinking-games/games',)
         this.fbRef = base.syncState(`drinking-games/${db}/games`,{

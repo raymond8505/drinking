@@ -1498,10 +1498,16 @@ span.GameListItem__title {
   .Desktop .Games {
     width: 25%; } }
 
+.Desktop__alert-shell {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
 .Games .Games__add-a-game {
   margin-top: 2em;
   border-top: 1px solid #111;
-  padding-top: 1em;
+  padding: 1em;
   position: sticky;
   bottom: 0;
   background: white;
@@ -1541,6 +1547,9 @@ input.RuleRow__title-field {
         opacity: 1; }
         tr:hover .RuleRow__controls-cell button {
           pointer-events: all; } }
+
+.RuleRow__drinks-cell {
+  max-width: 20ch; }
 
 .Loader {
   width: 100vw;
@@ -1700,7 +1709,9 @@ input.RuleRow__title-field {
   background: green;
   font-size: 2rem;
   font-weight: bold;
-  padding: 0; }
+  padding: 0;
+  border: none;
+  outline: none; }
   .ComboCounter__add-drink-btn:hover {
     background: #007600;
     color: #fff; }

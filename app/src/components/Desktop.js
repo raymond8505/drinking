@@ -60,7 +60,7 @@ class Desktop extends React.Component
                             setSessionCombo={this.props.setSessionCombo}
                             currentComboCount={this.props.currentComboCount}
                              /> 
-                        : <Alert tag="div" type="info">Choose a game from the left hand menu</Alert>}
+                        : <div className="Desktop__alert-shell"><Alert tag="div" type="info">Choose a game from the left hand menu</Alert></div>}
             </main>);
     }
 }
