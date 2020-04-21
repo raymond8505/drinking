@@ -2,14 +2,35 @@
 {
     display: flex;
     align-items: stretch;
-    height: calc(100vh - 2em);
-    background-color: --color;
-    .Game
+    height: 100vh;
+
+    .GameShell
     {
         width: 80%;
         margin-left: 1vw;
-        padding-left: 1vw;
-        border-left: 1px solid $color;
+        //padding-left: 1vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: stretch;
+
+        .Game
+        {
+            flex-grow: 1;
+            padding-left: 0;
+
+            &::-webkit-scrollbar {
+                width: 10px;
+            }
+            
+            &::-webkit-scrollbar-thumb {
+                background: rgba($color,.5); 
+            }
+            
+            &::-webkit-scrollbar-track {
+                background: transparent; 
+            }
+        }
+        //border-left: 1px solid $color;
     }
 
     .Game,.Games
@@ -21,6 +42,74 @@
     .Games
     {
         width: 20%;
+        @include padding((right,bottom),0);
+        background: lighten($color,5%);
+        color: $background;
+
+        a
+        {
+            @include default_link_color($background);
+            text-decoration: none;
+        }
+
+        button
+        {
+            &,*
+            {
+                background: transparent !important;
+            }
+        }
+
+        .EditButton__icon,.DeleteButton__icon,.GameListItem__copy-btn .fa
+        {
+            color: darken($background,30%);
+            @include animated;
+
+            &:hover
+            {
+                color: $background;
+            }
+        }
+
+        .GameList
+        {
+            display: block;
+            margin-right: .5em;
+            //height: 300px;
+
+            &::-webkit-scrollbar {
+                width: 5px;
+            }
+            
+            &::-webkit-scrollbar-thumb {
+                background: rgba($background,.5); 
+            }
+            
+            &::-webkit-scrollbar-track {
+                background: transparent; 
+            }
+        }
+
+        .GameSelect,
+        input
+        {
+            width: 100%;
+            margin-bottom: .2em;
+        }
+    }
+
+    .Games .Games__add-a-game
+    {
+        background: transparent;
+        border-top-color: rgba($background,.2);
+        padding-right: 0;
+        margin-right: 1em;
+
+        button
+        {
+            background-color: $background !important;
+            color: $color;
+        }
     }
 
     @media (min-width: $phone_width)

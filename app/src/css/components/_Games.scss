@@ -2,7 +2,7 @@
 {
     margin-top: 2em;
     border-top: 1px solid $color;
-    padding: 1em;
+    padding: 1em 1em 1em 0;
     position: sticky;
     bottom: 0;
     background: white;
@@ -22,8 +22,4 @@
         flex-shrink: 1;
         overflow-y: auto;
     }
-}
-.Desktop .Games
-{
-    @include padding((right,bottom),0);
 }

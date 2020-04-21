@@ -10,7 +10,7 @@ import Login from './Login';
 import firebase from 'firebase';
 import base from '../base';
 import Signup from './Signup';
-import SessionManager from './SessionManager';
+
 import {Link,withRouter} from 'react-router-dom';
 import ShortCutsModal from './ShortCutsModal';
 
@@ -707,7 +707,13 @@ class App extends React.Component
                     userLoggedIn={this.userLoggedIn}
                     getUser={this.getUser}
                     setSessionCombo={this.setSessionCombo}
-                    currentComboCount={this.getCurrentSessionComboCount()} />
+                    currentComboCount={this.getCurrentSessionComboCount()}
+                    createSession={this.createSession}
+                        leaveSession={this.leaveSession}
+                        joinSession={this.joinSession}
+                        currentSession={this.state.currentSession}
+                        renderAuthButton={this.renderAuthButton}
+                        user={this.state.user} />
             }
             
         }
@@ -717,28 +723,7 @@ class App extends React.Component
         return (
             
             <div className={`App App--${this.state.mobile ? 'mobile' : 'desktop'}`}>
-                <header className="App__header">
-                    <span>
-                        <Link to="/" className="App__home-link">Home</Link>
-                        {this.renderAuthButton()}
-                    </span>
-
-                    <SessionManager
-                        createSession={this.createSession}
-                        leaveSession={this.leaveSession}
-                        joinSession={this.joinSession}
-                        currentSession={this.state.currentSession}
-                    />
-                    
-                    <span className="App__current-user">
-                        
-                        {this.state.user.email}
-                    </span>
-
-                    <button class="App__shortcuts-ref" onClick={this.showShortcuts}>
-                        <i class="fa fa-keyboard-o"></i>
-                    </button>
-                </header>
+               
                 {view}
                 <ShortCutsModal ref={this.shortCutsModal} />
             </div>

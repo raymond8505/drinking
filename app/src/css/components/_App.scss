@@ -9,7 +9,7 @@
 {
     display: flex;
     justify-content: space-between;
-    @include padding(horizontal,1em);
+    //@include padding(horizontal,1em);
 }
 .App--mobile
 {

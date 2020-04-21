@@ -75,7 +75,7 @@ class AddGameForm extends React.Component
         
         return (
             <div className="AddGameForm">
-                <label>Parent Game</label><GameSelect 
+                {/* <label>Parent Game</label>  */}<GameSelect
                     games={this.props.games}
                     includeToplevel={true}
                     defaultValue={this.props.parent}
