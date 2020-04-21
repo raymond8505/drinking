@@ -36,6 +36,7 @@ class Game extends React.Component
     titleInput = React.createRef();
     editButton = React.createRef();
     shell = React.createRef();
+    gameScrollPostBeforeUpdate = 0;
 
     onParentChange = (e) => {
         
@@ -79,15 +80,7 @@ class Game extends React.Component
         this.setState({editing : !this.state.editing});
     }
 
-    componentDidUpdate()
-    {
-        if(this.state.editing)
-        {
-            this.titleInput.current.focus();
-        }
-
-        this.shell.current.scrollTo(0,0);
-    }
+    
 
 
     onDeleteClick = (e) => {
@@ -121,6 +114,26 @@ class Game extends React.Component
         });
 
         return html;
+    }
+
+    getSnapshotBeforeUpdate(prevProps,prevState)
+    {
+        this.gameScrollPostBeforeUpdate = this.shell.current.scrollTop;
+    }
+
+    componentDidUpdate(prevProps)
+    {
+        setTimeout(() => {
+            
+            this.shell.current.scrollTo(0,this.gameScrollPostBeforeUpdate);
+        }, 1);
+
+        if(this.state.editing)
+        {
+            this.titleInput.current.focus();
+        }
+
+        this.shell.current.scrollTo(0,0);
     }
 
     render()

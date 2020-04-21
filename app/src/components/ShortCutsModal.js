@@ -24,8 +24,12 @@ class ShortcutsModal extends React.Component
             desc : 'Resets the Combo Count to 0'
         },
         {
-            combo : 'cmd/ctrl + shift + f',
+            combo : 'cmd / ctrl + shift + F',
             desc : 'Focuses the rule filter field in a Game to filter the rules'
+        },
+        {
+            combo : 'option / alt + R',
+            desc : 'Focus Add a Rule form'
         }
 
     ]

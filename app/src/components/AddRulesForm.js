@@ -28,7 +28,7 @@ class AddRulesForm extends React.Component
 
         //console.log(e);
 
-        if(e.which === 174 && e.altKey)
+        if(e.which === 174 && e.altKey) //alt + r
         {
             this.ruleField.current.focus();
             e.preventDefault();
