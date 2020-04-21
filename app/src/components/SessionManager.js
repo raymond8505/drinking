@@ -33,7 +33,7 @@ class SessionManager extends React.Component
 
         if(this.state.currentSession === undefined)
         {
-            return (<div>
+            return (<div className="SessionManager__buttons">
                         <button className="SessionManager__create-session" onClick={this.handleCreateSession}>Create Session</button>
                         <input type="text" className="SessionManager__key-field" ref={this.keyField} placeholder="Session Code" />
                         <button className="SessionManager__join-session" onClick={this.handleJoinSession}>Join Session</button>

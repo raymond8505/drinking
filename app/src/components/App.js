@@ -62,6 +62,8 @@ class App extends React.Component
 
         sessions[key] = session;
 
+        //console.log(sessions); return;
+
         this.setState({sessions : sessions});
 
         setTimeout(() => {
@@ -95,12 +97,12 @@ class App extends React.Component
 
             if(now - session.created >= this.sessionLife)
             {
-                sessions[key] = undefined;
+                sessions[key] = null;
             }
 
         },sessions);
 
-        console.log(sessions);
+        //console.log(sessions);
 
         return sessions;
     }
@@ -709,11 +711,11 @@ class App extends React.Component
                     setSessionCombo={this.setSessionCombo}
                     currentComboCount={this.getCurrentSessionComboCount()}
                     createSession={this.createSession}
-                        leaveSession={this.leaveSession}
-                        joinSession={this.joinSession}
-                        currentSession={this.state.currentSession}
-                        renderAuthButton={this.renderAuthButton}
-                        user={this.state.user} />
+                    leaveSession={this.leaveSession}
+                    joinSession={this.joinSession}
+                    currentSession={this.state.currentSession}
+                    renderAuthButton={this.renderAuthButton}
+                    user={this.state.user} />
             }
             
         }

@@ -1273,7 +1273,8 @@ button,
 
 .App__header {
   display: flex;
-  justify-content: space-between; }
+  justify-content: space-between;
+  padding-top: .5em; }
 
 .App--mobile {
   padding-top: 1.81rem; }
@@ -1710,8 +1711,8 @@ input.RuleRow__title-field {
 .ComboCounter {
   transition: all 0.3s ease-in-out 0s;
   position: fixed;
-  right: 2.5em;
-  top: 2em;
+  right: 1em;
+  top: 3em;
   padding: .5em;
   z-index: 99;
   display: flex;
@@ -1723,7 +1724,8 @@ input.RuleRow__title-field {
     margin-left: 1rem; }
 
 .ComboCounter--closed {
-  transform: translateX(100%); }
+  transform: translateX(100%);
+  right: 2em; }
 
 .ComboCounter__shot-glass {
   clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 100%);
@@ -1798,7 +1800,8 @@ input.RuleRow__title-field {
 
 .ComboCounter__toggle-btn--open {
   opacity: 0;
-  pointer-events: none; }
+  pointer-events: none;
+  margin-left: 0; }
   .ComboCounter--closed .ComboCounter__toggle-btn--open {
     opacity: 1;
     pointer-events: all; }
@@ -1816,6 +1819,10 @@ input.RuleRow__title-field {
   margin-right: 1em;
   font-size: 1.3em;
   font-weight: bold; }
+
+.SessionManager__buttons {
+  display: flex;
+  align-items: stretch; }
 
 .ShortcutsModal {
   position: fixed;

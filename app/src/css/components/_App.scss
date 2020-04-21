@@ -9,6 +9,7 @@
 {
     display: flex;
     justify-content: space-between;
+    padding-top: .5em;
     //@include padding(horizontal,1em);
 }
 .App--mobile
@@ -22,5 +23,6 @@
         position: fixed;
         top: 0;
         left: 0;
+        
     }
 }
