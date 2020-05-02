@@ -23,7 +23,7 @@ class DeleteButton extends React.Component
     render()
     {
         return (
-            <button className={`DeleteButton DeleteButton--${this.state.currentMode}`} onClick={this.handleClick}>
+            <button className={`DeleteButton DeleteButton--${this.state.currentMode}`} onClick={this.handleClick} title="Delete Game">
                 <span className="sr-only">
                     {this.state.currentMode === 'display' ? 'Edit' : 'Confirm'}
                 </span>

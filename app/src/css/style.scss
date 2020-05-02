@@ -13,6 +13,11 @@ body,html
     background-color: $background;
 }
 
+::selection {
+    background-color: rgba($accent,.9);
+    color: $background;
+}
+
 table
 {
     td,th
@@ -22,7 +27,7 @@ table
 
     tr:nth-child(even)
     {
-        background: rgba($color,.1);
+        background: rgba($color,.05);
     }
 
     thead
@@ -120,3 +125,6 @@ button,
 @import "components/ComboCounter";
 @import "components/SessionManager";
 @import "components/ShortcutsModal";
+@import "components/GameMultiSelect";
+@import "components/GameAutoComplete";
+@import "components/GamePill";

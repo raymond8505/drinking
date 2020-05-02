@@ -1,0 +1,19 @@
+.GamePill
+{
+    margin: .15rem .3rem;
+    color: $background_light;
+    background-color: $accent;
+    padding: .2em .3em;
+    border-radius: .5em;
+    font-weight: bold;
+
+}
+.Desktop .Games .Games__add-a-game .GamePill__close-btn
+{
+    @include no-button-style;
+    background-color: transparent !important;
+    color: $background_light !important;
+    padding: .2em;
+    margin-left: 1em;
+    font-size: 1rem;
+}

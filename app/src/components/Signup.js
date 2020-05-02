@@ -1,6 +1,6 @@
 import React from 'react';
 import Alert from './Alert';
-import {Link} from 'react-router-dom';
+//import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 class Signup extends React.Component
@@ -14,7 +14,8 @@ class Signup extends React.Component
     }
 
     static propTypes = {
-        error : PropTypes.string
+        error : PropTypes.string,
+        signup : PropTypes.func.isRequired,
     }
 
     static defaultProps =  {

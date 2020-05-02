@@ -123,7 +123,7 @@ class GameListItem extends React.Component
                     <span className="GameListItem__controls-shell">
                         {this.props.canEditGame(this.game) ? <EditButton handler={this.onAddEditClick} /> : null}
                         {this.props.canDeleteGame(this.props.index) ? <DeleteButton handler={this.onDeleteClick} /> : null}
-                        {this.props.userLoggedIn() ? <button type="button" className="GameListItem__copy-btn" onClick={this.onCopyClick}>
+                        {this.props.userLoggedIn() ? <button type="button" className="GameListItem__copy-btn" onClick={this.onCopyClick} title="Copy Game">
                             <span className="sr-only">duplicate this game</span>
                             <i className="fa fa-copy"></i>
                         </button> : null}

@@ -36,7 +36,7 @@ class DataHelper
 
             let game = this.getGameByKey(key);
 
-            if(game.parent_game === parentKey)
+            if(game.parent_game && game.parent_game[0] === parentKey)
             {
                 //console.log(game,game.parent_game,'===',parentKey);
                 games[key] = game;
@@ -52,10 +52,11 @@ class DataHelper
 
     gameHasRules = (game) => game.rules && Object.keys(game.rules).length > 0;
 
-    getGameRules = (key,recursive = false,order) => {
-        
+    getGameRules = (key,includeParents = true,order) => {
+
         let game = this.getGameByKey(key);
         let rules = {};
+        let _this = this;
 
         if(this.gameHasRules(game))
         {
@@ -63,19 +64,48 @@ class DataHelper
                 rules[ruleKey] = Object.assign(game.rules[ruleKey],{gameKey : key});
             },game.rules);
         }
-        
-        if(recursive && game.parent_game)
-        {
-            let parentGame = this.getGameByKey(game.parent_game);
 
-            if(parentGame)
-            {
-                rules = Object.assign(rules,this.getGameRules(game.parent_game,recursive,order));
-            }
+        if(includeParents && game.parent_game && game.parent_game.length > 0)
+        {
+            //console.log('parent rules too');
+
+            game.parent_game.map((parentKey) => {
+                
+                Object.assign(rules, _this.getGameRules(parentKey,false,order));
+
+            });
         }
 
         return rules;
     }
+    
+    // getGameRules = (key,recursive = false,order) => {
+        
+    //     let game = this.getGameByKey(key);
+    //     let rules = {};
+    //     let _this = this;
+
+    //     if(this.gameHasRules(game))
+    //     {
+    //         this.forEach((ruleKey) => {
+    //             rules[ruleKey] = Object.assign(game.rules[ruleKey],{gameKey : key});
+    //         },game.rules);
+    //     }
+        
+    //     if(recursive && game.parent_game)
+    //     {
+    //         game.parent_game.forEach((key) => {
+    //             let parentGame = this.getGameByKey(key);
+            
+    //             if(parentGame && game.parent_game)
+    //             {
+    //                 rules = Object.assign(rules,_this.getGameRules(key,recursive,order));
+    //             }
+    //         });
+    //     }
+
+    //     return rules;
+    // }
 
     objectCollectionToArrayWithKey = (collection,keyFieldName = 'key') => {
 
@@ -114,7 +144,7 @@ class DataHelper
         
         rulesArr.sort((a,b) => {
             
-            let dirNum = order.direction == 'asc' ? 1 : -1;
+            let dirNum = order.direction === 'asc' ? 1 : -1;
             let valA = '';
             let valB = '';
 
@@ -149,7 +179,7 @@ class DataHelper
 
     sanitizeForSorting = (val) => {
 
-        let badChars = ['"',"'",'\-','\(','\)'];
+        let badChars = ['"',"'",'-','(',')'];
 
         badChars.forEach((char) => {
             
@@ -171,7 +201,7 @@ class DataHelper
 
     sortGamesBy = (field,dir = 'asc',games) => {
         
-        if(games == undefined)
+        if(games === undefined)
             return  {};
 
         //console.log('sort games',games);
@@ -209,6 +239,7 @@ class DataHelper
             switch(typeof a[field])
             {
                 case 'string' :
+                default : 
                     return a[field] && b[field] ? a[field].toLowerCase() < b[field].toLowerCase() ? dirNum * -1 : dirNum * 1 : 0;
             }
 
@@ -228,9 +259,9 @@ class DataHelper
 
         let game = this.getGameByKey(key);
 
-        if(game && game.parent_game)
+        if(game && game.parent_game[0])
         {
-            parentGame = {game : this.data[game.parent_game],key : game.parent_game};
+            parentGame = {game : this.data[game.parent_game[0]],key : game.parent_game[0]};
         }
 
         return parentGame;
@@ -238,14 +269,18 @@ class DataHelper
 
     getAncestors = (key) => {
         let ancestors = [];
-        let game = this.getGameByKey(key);
-        let parent; // = this.getParentGame(key);
+        //let game = this.getGameByKey(key);
+        
         let curKey = key;
+        let parent = undefined; //this.getParentGame(key);
 
-        while(parent = this.getParentGame(curKey))
+        while(parent !== undefined)
         {
             curKey = parent.key;
+            parent = this.getParentGame(curKey);
+
             ancestors.push(parent);
+            
         }
 
         return ancestors.reverse();
@@ -260,11 +295,12 @@ class DataHelper
 
             let game = this.getGameByKey(key);
 
-            if(game.owner != user)
+            if(game.owner !== user)
             {
                 success = false;
                 return;
             }
+            
         },childGames);
 
         return success;

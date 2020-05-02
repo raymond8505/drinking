@@ -1,0 +1,60 @@
+.GameAutoComplete
+{
+    //position: relative;
+}
+.GameAutoComplete__suggestions
+{
+    font-size: 1rem;
+    padding-left: 0;
+    position: absolute;
+    left: 0;
+    bottom: 7em; //1.75em;
+    background: $background_light;
+    color: $color;
+    width: 100%;
+    box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
+    
+    &, li
+    {
+        display: block;
+        margin-left: 0;
+        
+    };
+
+    li
+    {
+        @include animated;
+        padding: .2em .4em;
+
+        &:hover
+        {
+            background: $accent;
+            color: $background_light;
+        }
+        
+    }
+}
+
+.GameAutoComplete__suggestion
+{
+    @include animated;
+    padding: .2em .4em;
+
+    &:hover
+    {
+        background: $accent;
+        color: $background_light;
+    }
+    
+}
+
+.GameAutoComplete__suggestion--selected
+{
+    opacity: .5;
+    pointer-events: none;
+
+    &:after
+    {
+        content : ' (Selected)';
+    }
+}

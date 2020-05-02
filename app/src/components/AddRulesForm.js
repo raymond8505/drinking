@@ -53,7 +53,7 @@ class AddRulesForm extends React.Component
         let ruleTitle = this.ruleField.current.value;
         let drinks = this.drinksField.current.value;
         
-        if(rule === '' || drinks === '' || !gameKey || gameKey === '')
+        if(ruleTitle === '' || drinks === '' || !gameKey || gameKey === '')
         {
             alert('Please choose a game, enter a rule and a drink penalty.');
 
@@ -71,7 +71,7 @@ class AddRulesForm extends React.Component
 
     onKeyUp = (e) => {
 
-        if(e.which == 13) // Enter
+        if(e.which === 13) // Enter
         {
             this.handleAddClick();
             e.preventDefault();

@@ -1,10 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types'
+//import PropTypes from 'prop-types'
 
 class ShortcutsModal extends React.Component
 {
-    static propTypes = {};
-    static defaultTypes = {}
+    //static propTypes = {};
+    
+    //static defaultTypes = {}
 
     state = {
         open : false
@@ -45,8 +46,8 @@ class ShortcutsModal extends React.Component
 
     renderShortcuts = () => {
 
-        return this.shortcuts.map((shortcut) => {
-            return (<li className="ShortcutsModal__shortcut">
+        return this.shortcuts.map((shortcut,i) => {
+            return (<li key={`shortcut_${i}`} className="ShortcutsModal__shortcut">
                 <div className="ShortcutsModal__shortcut-keys">
                     {shortcut.combo}
                 </div>
@@ -62,7 +63,7 @@ class ShortcutsModal extends React.Component
 
         window.addEventListener('keyup',(e) => {
 
-            if(e.which == 27)
+            if(e.which === 27)
             {
                 this.close();
             }

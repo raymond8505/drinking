@@ -27,7 +27,7 @@ class EditButton extends React.Component
     render()
     {
         return (
-            <button className={`EditButton EditButton--${this.state.currentMode}`} onClick={this.handleClick}>
+            <button className={`EditButton EditButton--${this.state.currentMode}`} onClick={this.handleClick} title="Edit Game">
                 <span className="sr-only">
                     {this.state.currentMode === 'display' ? 'Edit' : 'Confirm'}
                 </span>

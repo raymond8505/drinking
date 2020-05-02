@@ -3,11 +3,17 @@ import PropTypes from 'prop-types';
 
 class ComboCounter extends React.Component
 {
-    static propTypes = {};
-    static defaultTypes = {};
+    static propTypes = {
+        setSessionCombo : PropTypes.func.isRequired,
+        count : PropTypes.number
+    };
+    
+    static defaultTypes = {
+        count : 0
+    };
 
     state = {
-        count : 0,
+        //count : 0,
         animating : false,
         open : true
     }
@@ -25,7 +31,9 @@ class ComboCounter extends React.Component
 
         let targetTag = e.target.tagName.toLowerCase();
 
-        if(targetTag == 'input' || targetTag == 'textarea' || targetTag == 'select') return;
+        if(targetTag === 'input' || 
+            targetTag === 'textarea' || 
+            targetTag === 'select') return;
 
         switch(e.which)
         {

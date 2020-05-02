@@ -3,8 +3,13 @@ import PropTypes from 'prop-types'
 
 class SessionManager extends React.Component
 {
-    static propTypes = {};
-    static defaultTypes = {}
+    static propTypes = {
+        currentSession : PropTypes.object,
+        leaveSession : PropTypes.func.isRequired,
+        createSession : PropTypes.func.isRequired,
+        joinSession : PropTypes.func.isRequired
+    };
+    //static defaultTypes = {}
 
     state = {
         currentSession : this.props.currentSession
@@ -14,7 +19,7 @@ class SessionManager extends React.Component
 
     handleCreateSession = (e) => {
         
-        this.props.createSession()
+        this.props.createSession();
 
     }
 
@@ -31,7 +36,7 @@ class SessionManager extends React.Component
 
     renderSessionButtons = () => {
 
-        if(this.state.currentSession === undefined)
+        if(this.props.currentSession === undefined)
         {
             return (<div className="SessionManager__buttons">
                         <button className="SessionManager__create-session" onClick={this.handleCreateSession}>Create Session</button>
@@ -42,7 +47,7 @@ class SessionManager extends React.Component
         else
         {
             return <div className="SessionManager__current-session">
-                <a title="Copy this link address and send to people you want to join the session" href={`/join/${this.state.currentSession}`} className="SeassionManager__session-key">{this.state.currentSession}</a>
+                <a title="Copy this link address and send to people you want to join the session" href={`/join/${this.props.currentSession}`} className="SeassionManager__session-key">{this.props.currentSession}</a>
                 <button className="SessionManager__leave-session-btn" onClick={this.leaveSession}>Leave Session</button>
             </div>;
         }
@@ -50,8 +55,6 @@ class SessionManager extends React.Component
 
     render()
     {
-        this.state.currentSession = this.props.currentSession;
-
         return (
             <div className="SessionManager">
                 {this.renderSessionButtons()}

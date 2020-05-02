@@ -10,7 +10,7 @@ import Login from './Login';
 import firebase from 'firebase';
 import base from '../base';
 import Signup from './Signup';
-
+import {GENERAL_RULES_KEY,RAYMOND_UID} from '../constants';
 import {Link,withRouter} from 'react-router-dom';
 import ShortCutsModal from './ShortCutsModal';
 
@@ -27,9 +27,10 @@ class App extends React.Component
         loggingIn : false,
         currentSession : undefined,
         sessions : {},
+        gamesInited : false
     }
 
-    RAYMOND_UID = 'uGqTXpxQHzg4K7DRhObVWvValvF3';
+    
 
     sessionKeyLength = 4;
 
@@ -84,6 +85,10 @@ class App extends React.Component
                 sessions[this.state.currentSession].currentComboCount = count;
             
             this.setState({sessions});
+        }
+        else
+        {
+            alert('The Combo Counter can only be used in a session');
         }
     }
 
@@ -213,11 +218,37 @@ class App extends React.Component
                 //after we sync the state to firebase, if there are no games, load up some fake ones for testing
                 if(Object.keys(this.state.games).length === 0)
                 {
-                    
                     this.setState({games : fakeGames });
                 }
 
                 this.setState({loading:false});
+
+                //the first time tha games sync, check if any parent_game keys are strings and make them arrays.
+                
+                if(!this.state.gamesInited)
+                {
+                    let games = {...this.state.games};
+
+                    this.data.forEach((key)=>{
+
+                        let game = games[key];
+
+                        if(typeof game['parent_game'] == 'string')
+                        {
+                            games[key]['parent_game'] = [game['parent_game']];
+                        }
+
+                        if(games[key].parent_game && !games[key].parent_game.includes(GENERAL_RULES_KEY))
+                        {
+                            games[key].parent_game.push(GENERAL_RULES_KEY);
+                        }
+                    },games);
+
+                    this.setState({
+                        games : games,
+                        gamesInited : true
+                    });
+                }
             }
         });
 
@@ -250,19 +281,19 @@ class App extends React.Component
         let game = typeof gameKey === 'string' ? this.data.getGameByKey(gameKey) : gameKey;
 
         //console.log(game.title,this.state.user.uid === this.RAYMOND_UID || (game.owner && game.owner === this.state.user.uid));
-        return this.state.user.uid === this.RAYMOND_UID || (game.owner && game.owner === this.state.user.uid);
+        return this.state.user.uid === RAYMOND_UID || (game.owner && game.owner === this.state.user.uid);
     }
 
     canDeleteRule = (rule) => {
 
-        return this.state.user.uid === this.RAYMOND_UID || rule.owner === this.state.user.uid;
+        return this.state.user.uid === RAYMOND_UID || rule.owner === this.state.user.uid;
     }
 
     canDeleteGame = (gameKey) => {
 
         let game = this.data.getGameByKey(gameKey);
 
-        if(this.state.user.uid === this.RAYMOND_UID) return true;
+        if(this.state.user.uid === RAYMOND_UID) return true;
 
         if(!game.owner || game.owner !== this.state.user.uid) return false;
 
@@ -328,12 +359,16 @@ class App extends React.Component
         this.setState({games});
     }
 
-    addGame = (gameTitle,parentKey) =>
+    addGame = (gameTitle,parents) =>
     {
         let game = {
             title : gameTitle,
             rules : {}
         };
+
+        let parentKey = parents.map((game)=>{
+            return game.gameKey;
+        })
 
         game.owner = this.state.user.uid;
 
@@ -443,7 +478,7 @@ class App extends React.Component
             loggingIn : false
         });
 
-        if(this.props.location.pathname == '/signup')
+        if(this.props.location.pathname === '/signup')
         {
             this.props.history.push('/');
         }

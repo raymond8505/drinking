@@ -42,9 +42,12 @@
     .Games
     {
         width: 20%;
+        flex-shrink: 0;
+        flex-grow: 0;
         @include padding((right,bottom),0);
         background: lighten($color,5%);
         color: $background;
+        overflow: hidden;
 
         a
         {

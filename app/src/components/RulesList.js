@@ -132,6 +132,8 @@ class RulesList extends React.Component
     {
         this.data = new DataHelper(this.props.games);
 
+        //console.log(this.props.index);
+
         this.rules = this.data.getGameRules(this.props.index,true);
 
         if(this.state.order)

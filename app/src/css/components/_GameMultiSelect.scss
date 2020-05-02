@@ -1,0 +1,28 @@
+.GameMultiSelect
+{
+    padding: 0;//.3em;
+    background: $background_light;
+    color: $color;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 0 .5em;
+
+    &,li
+    {
+        list-style: none;
+    }
+
+    li
+    {
+        font-size: .85em;
+    }
+
+    .GamePill
+    {
+        font-size: .7em;
+    }
+}
+.GameMultiSelect__add-game
+{
+    padding: .2em .4em;
+}

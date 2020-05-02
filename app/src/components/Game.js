@@ -9,10 +9,11 @@ import AddGameForm from './AddGameForm';
 import {changePageTitle} from '../helpers';
 import GameSelect from './GameSelect';
 import EditButton from './EditButton';
-import GameListItem from './GameListItem';
+//import GameListItem from './GameListItem';
 import DeleteButton from './DeleteButton';
 import {Link} from 'react-router-dom';
 import ComboCounter from './ComboCounter';
+import {GENERAL_RULES_KEY} from '../constants';
 
 class Game extends React.Component
 {
@@ -118,14 +119,17 @@ class Game extends React.Component
 
     getSnapshotBeforeUpdate(prevProps,prevState)
     {
-        this.gameScrollPostBeforeUpdate = this.shell.current.scrollTop;
+        this.gameScrollPostBeforeUpdate = this.shell.current ? this.shell.current.scrollTop : 0;
+
+        return null;
     }
 
     componentDidUpdate(prevProps)
     {
         setTimeout(() => {
             
-            this.shell.current.scrollTo(0,this.gameScrollPostBeforeUpdate);
+            if(this.shell.current)
+                this.shell.current.scrollTo(0,this.gameScrollPostBeforeUpdate);
         }, 1);
 
         if(this.state.editing)
@@ -133,7 +137,8 @@ class Game extends React.Component
             this.titleInput.current.focus();
         }
 
-        this.shell.current.scrollTo(0,0);
+        if(this.shell.current)
+            this.shell.current.scrollTo(0,0);
     }
 
     render()
@@ -142,7 +147,7 @@ class Game extends React.Component
 
         let game = this.data.getGameByKey(this.props.index);
 
-        let parentGame = game.parent_game ? this.data.getGameByKey(game.parent_game) : null;
+        //let parentGame = game.parent_game ? this.data.getGameByKey(game.parent_game) : null;
 
         if(!game) return NotFound;
 
@@ -168,13 +173,13 @@ class Game extends React.Component
                             }
                         }} />
                     {this.props.canEditGame(this.props.index) ? <div className="Game__parent-change-select">
-                    
-                        <label>Parent:</label>  <GameSelect
+                        
+                        {this.props.index !== GENERAL_RULES_KEY ? <span><label>Parent:</label>  <GameSelect
                             onChange={this.onParentChange}
-                            defaultValue={this.data.getGameByKey(this.props.index).parent_game}
+                            defaultValue={[this.data.getGameByKey(this.props.index).parent_game]}
                             games={this.props.games}
                             
-                        />
+                        /></span> : null}
                         <EditButton handler={this.handleTitleEditClick} ref={this.editButton} />
                         {this.props.canDeleteGame(this.props.index) ? <DeleteButton handler={this.onDeleteClick} /> : null}
                      </div> : null}
