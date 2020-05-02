@@ -225,30 +225,30 @@ class App extends React.Component
 
                 //the first time tha games sync, check if any parent_game keys are strings and make them arrays.
                 
-                if(!this.state.gamesInited)
-                {
-                    let games = {...this.state.games};
+                // if(!this.state.gamesInited)
+                // {
+                //     let games = {...this.state.games};
 
-                    this.data.forEach((key)=>{
+                //     this.data.forEach((key)=>{
 
-                        let game = games[key];
+                //         let game = games[key];
 
-                        if(typeof game['parent_game'] == 'string')
-                        {
-                            games[key]['parent_game'] = [game['parent_game']];
-                        }
+                //         if(typeof game['parent_game'] == 'string')
+                //         {
+                //             games[key]['parent_game'] = [game['parent_game']];
+                //         }
 
-                        if(games[key].parent_game && !games[key].parent_game.includes(GENERAL_RULES_KEY))
-                        {
-                            games[key].parent_game.push(GENERAL_RULES_KEY);
-                        }
-                    },games);
+                //         if(games[key].parent_game && !games[key].parent_game.includes(GENERAL_RULES_KEY))
+                //         {
+                //             games[key].parent_game.push(GENERAL_RULES_KEY);
+                //         }
+                //     },games);
 
-                    this.setState({
-                        games : games,
-                        gamesInited : true
-                    });
-                }
+                //     this.setState({
+                //         games : games,
+                //         gamesInited : true
+                //     });
+                // }
             }
         });
 

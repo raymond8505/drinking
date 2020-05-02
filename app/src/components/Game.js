@@ -121,10 +121,9 @@ class Game extends React.Component
         else
         {
             
-
-                return (<ul className="Game__parents">{parents.map((parent) => {
+                return (parents && parents.length > 0 ? <ul className="Game__parents">{parents.map((parent) => {
                     return <GamePill game={parent} showCloseBtn={false} />
-                })}</ul>);
+                })}</ul> : null);
         }
         
     }

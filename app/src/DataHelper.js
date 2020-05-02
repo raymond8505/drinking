@@ -257,13 +257,13 @@ class DataHelper
 
         let game = typeof gameOrKey === 'object' ? gameOrKey : this.getGameByKey(gameOrKey);
 
-        let parents = game.parent_game.map((parentKey) => {
+        let parents = game.parent_game && game.parent_game.length > 0 ? game.parent_game.map((parentKey) => {
 
             let parent = this.getGameByKey(parentKey);
                 parent.gameKey = parentKey;
 
                 return parent;
-        });
+        }) : [];
 
         return parents;
         
