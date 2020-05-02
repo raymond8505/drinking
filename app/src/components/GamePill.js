@@ -7,11 +7,13 @@ class GamePill extends React.Component
         game : PropTypes.object.isRequired,
         tag : PropTypes.string,
         onClick : PropTypes.func,
-        onClose : PropTypes.func.isRequired
+        onClose : PropTypes.func.isRequired,
+        showCloseBtn : PropTypes.bool
     };
 
     static defaultProps = {
-        tag : 'li'
+        tag : 'li',
+        showCloseBtn : true
     }
 
     onClose = (e) => {
@@ -26,7 +28,7 @@ class GamePill extends React.Component
         return (
             <Tag className={`GamePill GamePill--${this.props.game.gameKey}`}>
                 {this.props.game.title}
-                <button className="GamePill__close-btn" onClick={this.onClose}>&times;</button>
+                {this.props.showCloseBtn ? <button className="GamePill__close-btn" onClick={this.onClose}>&times;</button> : null}
             </Tag>);
     }
 }

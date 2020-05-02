@@ -253,18 +253,27 @@ class DataHelper
 
     }
 
-    getParentGame = (key) => {
+    getParentGames = (gameOrKey) => {
 
-        let parentGame = null;
+        let game = typeof gameOrKey === 'object' ? gameOrKey : this.getGameByKey(gameOrKey);
 
-        let game = this.getGameByKey(key);
+        let parents = game.parent_game.map((parentKey) => {
 
-        if(game && game.parent_game[0])
-        {
-            parentGame = {game : this.data[game.parent_game[0]],key : game.parent_game[0]};
-        }
+            let parent = this.getGameByKey(parentKey);
+                parent.gameKey = parentKey;
 
-        return parentGame;
+                return parent;
+        });
+
+        return parents;
+        
+    }
+
+    gamesToKeys = (games) => {
+
+        return games.map((game) => {
+            return game.gameKey;
+        })
     }
 
     getAncestors = (key) => {
@@ -277,7 +286,7 @@ class DataHelper
         while(parent !== undefined)
         {
             curKey = parent.key;
-            parent = this.getParentGame(curKey);
+            parent = this.getParentGames(curKey);
 
             ancestors.push(parent);
             

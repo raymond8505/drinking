@@ -47,7 +47,10 @@
 {
     color: $color;
 }
-.Game__title-value,
+.Game__title-value
+{
+    float: left;
+}
 .Game__title
 {
     width: 100%;
@@ -56,4 +59,38 @@
 {
     display: inline-block;
     padding: 0 .5em;
+}
+.Game__parents
+{
+    position: relative;
+    display: flex;
+    padding: 0;
+    margin: 0;
+    
+    .Game:not(.Game--editing) &
+    {
+
+        font-size: .8em;
+    }
+
+    &,li
+    {
+        list-style: none;
+    }
+    
+    .GameAutoComplete__suggestions
+    {
+        bottom: none;
+        top: 1.5em;
+        background-color: $background_light;
+        width: 100%;
+        z-index: 999;
+    }
+}
+.Game:not(.Game--editing) .GamePill
+{
+    background-color: darken($background,8%);
+    color: $color;
+    margin-left: 0;
+    margin-right: .8em;
 }

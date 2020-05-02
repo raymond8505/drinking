@@ -8,6 +8,7 @@ class GameAutoComplete extends React.Component
     static propTypes = {
         games : PropTypes.object.isRequired,
         selectedGames : PropTypes.array.isRequired,
+        excludedGames : PropTypes.array,
         defaultValue : PropTypes.array, //an array of games to autofill into the field
         onGameSelect : PropTypes.func.isRequired,
         placeholder : PropTypes.string,
@@ -16,6 +17,7 @@ class GameAutoComplete extends React.Component
 
     static defaultProps = {
        placeholder : 'Game Title',
+       excludedGames : [],
        includeGeneralRules : false
     }
 
@@ -67,11 +69,24 @@ class GameAutoComplete extends React.Component
             this.data.forEach((key) => {
 
                 let game = this.props.games[key];
-    
+                let shouldInclude = true;
+
                 if(game.title.toLowerCase().indexOf(q) > -1)
                 {
-                    game.gameKey = key;
-                    suggestions.push(game);
+                    if(game.gameKey === GENERAL_RULES_KEY)
+                    {
+                        shouldInclude = this.props.includeGeneralRules;
+                    }
+
+                    shouldInclude = !this.props.excludedGames.includes(game.gameKey);
+                    
+                    if(shouldInclude)
+                    {
+                        game.gameKey = key;
+
+                        suggestions.push(game);
+                    }
+                    
                 }
     
             },this.props.games);
@@ -99,15 +114,10 @@ class GameAutoComplete extends React.Component
 
         if(this.state && this.state.suggestions && this.state.suggestions.length > 0)
         {
-            return (<ul className="GameAutoComplete__suggestions">
+            return (<ul className="GameAutoComplete__suggestions" style={{height : `${this.state.suggestions.length * 1.55}em`}}>
                 {this.state.suggestions.map((game,i) => {
 
                     let shouldInclude = true;
-                    
-                    if(game.gameKey === GENERAL_RULES_KEY)
-                    {
-                        shouldInclude = this.props.includeGeneralRules;
-                    }
 
                     return (shouldInclude ? <li className={`GameAutoComplete__suggestion${this.isSelected(game) ? ' GameAutoComplete__suggestion--selected' : ''}`} 
                                                 key={`gac_${game.gameKey}`} 

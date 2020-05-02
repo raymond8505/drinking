@@ -29,7 +29,7 @@ class AddGameForm extends React.Component
 
     clearForm = () => {
         this.titleField.current.value = '';
-        this.gameSelect.current.innerSelect.current.value = this.props.parent;
+        this.gameSelect.current.clearGames();
     }
 
     onKeyUp = (e) => {

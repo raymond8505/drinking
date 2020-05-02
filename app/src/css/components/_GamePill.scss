@@ -8,7 +8,8 @@
     font-weight: bold;
 
 }
-.Desktop .Games .Games__add-a-game .GamePill__close-btn
+.Desktop .Games .Games__add-a-game .GamePill__close-btn,
+.Desktop .Game .GamePill__close-btn
 {
     @include no-button-style;
     background-color: transparent !important;

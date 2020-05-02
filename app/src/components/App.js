@@ -368,7 +368,14 @@ class App extends React.Component
 
         let parentKey = parents.map((game)=>{
             return game.gameKey;
-        })
+        });
+
+        if(!parentKey.includes(GENERAL_RULES_KEY))
+        {
+            parentKey.push(GENERAL_RULES_KEY);
+        };
+
+        console.log(parentKey);
 
         game.owner = this.state.user.uid;
 

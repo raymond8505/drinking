@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import GameAutoComplete from './GameAutoComplete';
 import GamePill from './GamePill';
+import { GENERAL_RULES_KEY } from '../constants';
+import DataHelper from '../DataHelper';
 
 class GameMultiSelect extends React.Component
 {
@@ -11,11 +13,14 @@ class GameMultiSelect extends React.Component
         defaultValue : PropTypes.array,
         ref : PropTypes.object,
         placeholder : PropTypes.string,
-        onError : PropTypes.func.isRequired
+        onError : PropTypes.func.isRequired,
+        selectedGames : PropTypes.array,
+        excludedGames : PropTypes.array
     };
 
     static defaultProps = {
-        selectedGames : []
+        selectedGames : [],
+        excludedGames : []
     }
 
     state = {
@@ -29,6 +34,19 @@ class GameMultiSelect extends React.Component
     */
     sanitizeGames = (games) => {
 
+        if(!this.gameSelected(GENERAL_RULES_KEY))
+        {
+            let data = new DataHelper(this.props.games);
+            let gen = data.getGameByKey(GENERAL_RULES_KEY);
+                gen.gameKey = GENERAL_RULES_KEY;
+                games.push(gen);
+        }
+
+        return games;
+    }
+
+    clearGames = () => {
+        this.setState({selectedGames : []});
     }
 
     newGameSelect = (game) => {
@@ -47,10 +65,11 @@ class GameMultiSelect extends React.Component
     gameSelected = (game) => {
 
         let selected = false;
+        let gameKey = typeof game === 'object' ? game.gameKey : game;
 
         this.state.selectedGames.forEach((selectedGame,i) => {
 
-            if(game.gameKey === selectedGame.gameKey)
+            if(gameKey === selectedGame.gameKey)
             {
                 selected = true;
                 return;
@@ -73,6 +92,7 @@ class GameMultiSelect extends React.Component
     renderGames =() => {
         
         return this.state.selectedGames.map((game) => {
+            
             return (<GamePill 
                         key={`gms_${game.gameKey}`} 
                         game={game}
@@ -91,7 +111,8 @@ class GameMultiSelect extends React.Component
                         games={this.props.games}
                         selectedGames={this.state.selectedGames} 
                         onGameSelect={this.newGameSelect} 
-                        placeholder={this.props.placeholder} />
+                        placeholder={this.props.placeholder}
+                        excludedGames={this.props.excludedGames} />
                 </li>
             </ul>);
     }

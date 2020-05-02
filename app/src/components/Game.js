@@ -14,6 +14,8 @@ import DeleteButton from './DeleteButton';
 import {Link} from 'react-router-dom';
 import ComboCounter from './ComboCounter';
 import {GENERAL_RULES_KEY} from '../constants';
+import GamePill from './GamePill';
+import GameMultiSelect from './GameMultiSelect';
 
 class Game extends React.Component
 {
@@ -37,6 +39,8 @@ class Game extends React.Component
     titleInput = React.createRef();
     editButton = React.createRef();
     shell = React.createRef();
+    parentsMS = React.createRef();
+
     gameScrollPostBeforeUpdate = 0;
 
     onParentChange = (e) => {
@@ -65,9 +69,14 @@ class Game extends React.Component
             {
                 this.titleInput.current.value = game.title;
             }
-            else if(this.titleInput.current.value !== game.title)
+            else //if(this.titleInput.current.value !== game.title)
             {
+                this.data = new DataHelper(this.props.games);
+
                 game.title = this.titleInput.current.value;
+                
+                game.parent_game = this.data.gamesToKeys(this.parentsMS.current.state.selectedGames);
+
                 this.props.editGame(this.props.index,game);
             }
             
@@ -92,6 +101,30 @@ class Game extends React.Component
         if(window.confirm(`Are you sure you want to delete "${game.title}"?`))
         {
             this.props.deleteGame(this.props.index);
+        }
+        
+    }
+
+    renderParentPills = () => {
+
+        let game = this.data.getGameByKey(this.props.index);
+        let parents = this.data.getParentGames(game);
+
+        if(this.state.editing)
+        {
+            return (<div className="Game__parents"><GameMultiSelect
+                        ref={this.parentsMS}
+                        selectedGames={parents}
+                        excludedGames={[this.props.index]}
+                        games={this.props.games} /></div>);
+        }
+        else
+        {
+            
+
+                return (<ul className="Game__parents">{parents.map((parent) => {
+                    return <GamePill game={parent} showCloseBtn={false} />
+                })}</ul>);
         }
         
     }
@@ -154,14 +187,15 @@ class Game extends React.Component
         changePageTitle(game.title + ' | Drinking Games'); 
         
         return (
-            <div className="Game" ref={this.shell}>
+            <div className={`Game ${this.state.editing ? ' Game--editing' : ''}`} ref={this.shell}>
                 <ComboCounter setSessionCombo={this.props.setSessionCombo} count={this.props.currentComboCount} />
-                {this.renderBreadCrumbs()}
+                {this.renderParentPills()}
                 <h1 className="Game__title">
                     <input 
                         name={this.props.index + Date.now()} 
                         key={this.props.index + Date.now()} 
-                        type="text" 
+                        type="text"
+                        style={{width: `${game.title.length}ch`}} 
                         defaultValue={game.title}
                         ref={this.titleInput}
                         disabled={!this.state.editing}
@@ -174,12 +208,6 @@ class Game extends React.Component
                         }} />
                     {this.props.canEditGame(this.props.index) ? <div className="Game__parent-change-select">
                         
-                        {this.props.index !== GENERAL_RULES_KEY ? <span><label>Parent:</label>  <GameSelect
-                            onChange={this.onParentChange}
-                            defaultValue={[this.data.getGameByKey(this.props.index).parent_game]}
-                            games={this.props.games}
-                            
-                        /></span> : null}
                         <EditButton handler={this.handleTitleEditClick} ref={this.editButton} />
                         {this.props.canDeleteGame(this.props.index) ? <DeleteButton handler={this.onDeleteClick} /> : null}
                      </div> : null}

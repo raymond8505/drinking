@@ -1471,13 +1471,37 @@ span.GameListItem__title {
 .Game__title-value {
   color: #111; }
 
-.Game__title-value,
+.Game__title-value {
+  float: left; }
+
 .Game__title {
   width: 100%; }
 
 .Game__parent-delimiter {
   display: inline-block;
   padding: 0 .5em; }
+
+.Game__parents {
+  position: relative;
+  display: flex;
+  padding: 0;
+  margin: 0; }
+  .Game:not(.Game--editing) .Game__parents {
+    font-size: .8em; }
+  .Game__parents, .Game__parents li {
+    list-style: none; }
+  .Game__parents .GameAutoComplete__suggestions {
+    bottom: none;
+    top: 1.5em;
+    background-color: #fff;
+    width: 100%;
+    z-index: 999; }
+
+.Game:not(.Game--editing) .GamePill {
+  background-color: #dbdbdb;
+  color: #111;
+  margin-left: 0;
+  margin-right: .8em; }
 
 .Desktop {
   display: flex;
@@ -1938,7 +1962,8 @@ input.RuleRow__title-field {
   border-radius: .5em;
   font-weight: bold; }
 
-.Desktop .Games .Games__add-a-game .GamePill__close-btn {
+.Desktop .Games .Games__add-a-game .GamePill__close-btn,
+.Desktop .Game .GamePill__close-btn {
   background: transparent;
   border: none;
   font-size: 1em;
