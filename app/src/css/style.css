@@ -1467,6 +1467,9 @@ span.GameListItem__title {
 
 .Game__parent-change-select {
   font-size: 1rem; }
+  .Game__parent-change-select .EditButton,
+  .Game__parent-change-select .DeleteButton {
+    padding: .3em; }
 
 .Game__title-value {
   color: #111; }

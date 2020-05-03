@@ -6,13 +6,15 @@ class GameSelect extends React.Component
 {
     static propTypes = {
         games : PropTypes.object.isRequired,
-        defaultValue : PropTypes.string
+        defaultValue : PropTypes.string,
+        excludedGames : PropTypes.array //doesn't work... yet
     };
 
     static defaultProps =  {
         includeToplevel : false,
-        defaultValue : 'game0',
-        onChange : function(e){}
+        //defaultValue : 'game0',
+        onChange : function(e){},
+        excludedGames : []
     }
 
     innerSelect = React.createRef();
@@ -37,6 +39,7 @@ class GameSelect extends React.Component
     }
     render()
     {
+        console.log(this.props.defaultValue);
         return (
             <select className="GameSelect" ref={this.innerSelect} onChange={this.props.onChange}>
                 {/* this.props.includeToplevel ? <option value="">Top Level</option> : null */}

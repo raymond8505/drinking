@@ -42,6 +42,12 @@
 .Game__parent-change-select
 {
     font-size: 1rem;
+
+    .EditButton,
+    .DeleteButton
+    {
+        padding: .3em;
+    }
 }
 .Game__title-value
 {

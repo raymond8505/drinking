@@ -314,13 +314,23 @@ class App extends React.Component
         
         newRule.drinks = this.sanitizeDrinks(newRule.drinks);
         
-        if(game && game.rules && game.rules[ruleKey])
+        if(game && game.rules && game.rules[ruleKey] && gameKey === newRule.gameKey)
         {
             games[gameKey].rules[ruleKey] = newRule;
-
-            this.setState({games});
-
         }
+        else
+        {
+            let oldGame = game;
+            let newGame = games[newRule.gameKey];
+
+            if(oldGame && newGame && newGame.rules)
+            {
+                games[gameKey].rules[ruleKey] = null;
+                games[newRule.gameKey].rules[ruleKey] = newRule;
+            }
+        }
+
+        this.setState({games});
     }
 
     deleteRule = (gameKey,ruleKey) =>

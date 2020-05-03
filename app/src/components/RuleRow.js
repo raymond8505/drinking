@@ -4,6 +4,7 @@ import EditButton from './EditButton';
 import DeleteButton from './DeleteButton';
 import DataHelper from '../DataHelper';
 import {Link} from 'react-router-dom';
+import GameSelect from './GameSelect';
 
 class RuleRow extends React.Component
 {
@@ -14,6 +15,7 @@ class RuleRow extends React.Component
 
     ruleField = React.createRef();
     drinksField = React.createRef();
+    gameSelect = React.createRef();
 
     static propTypes = {
         ruleIndex : PropTypes.string.isRequired,
@@ -41,7 +43,7 @@ class RuleRow extends React.Component
     handleRuleEdit = (e) => {
 
         let editing = this.state.editing;
-        this.setState({editing : !editing});
+        
 
         //let drinksField = this.state.drinksField.current;
         //let ruleField = this.state.ruleField.current;
@@ -67,11 +69,14 @@ class RuleRow extends React.Component
             let ruleObj = {...this.state.rule};
                 ruleObj.rule = rule;
                 ruleObj.drinks = drinks;
+            
+                ruleObj.gameKey = this.gameSelect.current.innerSelect.current.value;//.innerSelect.value;
 
             this.props.editRule(this.props.rule.gameKey,this.props.ruleIndex,ruleObj);
 
             this.setState({
-                rule : ruleObj
+                rule : ruleObj,
+                editing : !editing
             });
         }
         /* this.setState({
@@ -97,7 +102,7 @@ class RuleRow extends React.Component
 
     }
 
-    handleRuleDelete = (e) => {
+    handleRuleDelete = (e) => { 
         
         if(window.confirm(`Are you sure you want to Delete the rule ${this.state.rule.rule} (${this.state.rule.drinks})?`))
         {
@@ -109,7 +114,10 @@ class RuleRow extends React.Component
 
     renderRule = () =>
     {
-        let input = <input className="RuleRow__title-field editable" onKeyPress={(e) => {
+        let input = <input className="RuleRow__title-field editable" onKeyUp={(e) => {
+
+            this.closeOnEscape(e);
+
             if(e.which === 13)
             {
                 this.handleRuleEdit();
@@ -139,12 +147,17 @@ class RuleRow extends React.Component
             disabled={!this.state.editing} 
             ref={this.drinksField} 
             defaultValue={this.props.rule.drinks}
-            onKeyPress={(e) => {
-            if(e.which === 13)
-            {
-                this.handleRuleEdit();
-            }
-        }} />
+            onKeyUp={(e) => {
+
+                console.log(e.which);
+
+                this.closeOnEscape(e);
+
+                if(e.which === 13)
+                {
+                    this.handleRuleEdit();
+                }
+            }} />
         let span = <span className="RuleRow__drinks-field">{this.props.rule.drinks}</span>;
 
         return this.state.editing ? input : span;
@@ -155,6 +168,24 @@ class RuleRow extends React.Component
         if(!this.state.editing)
         {
             this.setState({editing : true});
+        }
+    }
+
+    renderGame = (game) => {
+        
+        return this.state.editing ? 
+                <GameSelect
+                    games={this.props.games}
+                    defaultValue={this.props.rule.gameKey}
+                    ref={this.gameSelect} />
+                : <Link to={`/game/${this.props.rule.gameKey}`} className="RuleRow__game-link">{game.title}</Link>;
+    }
+
+    closeOnEscape = (e) => {
+
+        if(e.which == 27)
+        {
+            this.setState({editing : false});
         }
     }
 
@@ -172,7 +203,7 @@ class RuleRow extends React.Component
                     {this.renderDrinks()}
                 </td>
                 <td className="RuleRow__game-cell">
-                    <Link to={`/game/${this.props.rule.gameKey}`} className="RuleRow__game-link">{game.title}</Link>
+                    {this.renderGame(game)}
                 </td>
                 <td className="RuleRow__owner-cell">
                     {this.renderOwner(this.props.rule.owner)}
