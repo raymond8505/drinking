@@ -128,11 +128,29 @@ class RulesList extends React.Component
             : null
     }
 
+    getSnapshotBeforeUpdate(prevProps,prevState)
+    {
+        this.currentGameKey = this.props.index;
+
+        return null;
+    }
+
+    getSnapshotAfterUpdate()
+    {
+        this.currentGameKey = this.props.index;
+    }
+    
     render()
     {
-        this.data = new DataHelper(this.props.games);
+        if(this.currentGameKey !== this.props.index && this.currentGameKey)
+        {
+            setTimeout(() => {
+                this.filterField.current.value = '';
+                this.onFilterKeyUp({currentTarget : this.filterField.current});
+            }, 1);
+        }
 
-        //console.log(this.props.index);
+        this.data = new DataHelper(this.props.games);
 
         this.rules = this.data.getGameRules(this.props.index,true);
 

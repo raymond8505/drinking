@@ -23,7 +23,9 @@ class GameAutoComplete extends React.Component
 
     static state = {
         suggestions : [],
-        selectedGames : []
+        selectedGames : [],
+        currentSelection : 0,
+        currentSuggestion : 0
     }
 
     titleField = React.createRef();
@@ -38,6 +40,13 @@ class GameAutoComplete extends React.Component
         }
         else
         {
+            switch(e.which)
+            {
+                case 40: //down / next
+                    this.nextSuggestion();
+                    break;
+            }
+
             this.renderAutoComplete(e.target.value);
         }
     }
@@ -110,6 +119,42 @@ class GameAutoComplete extends React.Component
         this.setState({suggestions : []});
     }
 
+    setCurrentSuggestion = (i) => {
+        this.setState({currentSuggestion : i});
+    }
+
+    nextSuggestion = () => {
+
+        let nextSuggestion = this.findNextSuggestion(this.state.currentSuggestion || 0);
+
+        this.setState({currentSuggestion : nextSuggestion});
+    }
+
+    findNextSuggestion = (current) => {
+
+        let nextIndex = current == this.state.suggestions.length - 1 ? 0 : current + 1;
+
+        return this.isSelected(this.state.suggestions[nextIndex]) ? this.findNextSuggestion(nextIndex) : nextIndex;
+    }
+
+    allSuggestionsSelected = () => {
+
+        let allSelected = true;
+
+        for(let i in this.state.suggestions)
+        {
+            let game = this.state.suggestions[i];
+
+            if(!this.isSelected(game))
+            {
+                allSelected = false;
+                break;
+            }
+        }
+        
+        return allSelected;
+    }
+
     renderSuggestions = () => {
 
         if(this.state && this.state.suggestions && this.state.suggestions.length > 0)
@@ -119,9 +164,27 @@ class GameAutoComplete extends React.Component
 
                     let shouldInclude = true;
 
-                    return (shouldInclude ? <li className={`GameAutoComplete__suggestion${this.isSelected(game) ? ' GameAutoComplete__suggestion--selected' : ''}`} 
+                    let classes = ['GameAutoComplete__suggestion'];
+
+                    if(this.isSelected(game))
+                    {
+                        classes.push('GameAutoComplete__suggestion--selected');    
+                    }
+                    
+                    if(i === this.state.currentSuggestion || !this.state.currentSuggestion && i === 0)
+                    {
+                        classes.push('GameAutoComplete__suggestion--current')
+                    }
+
+                    return (shouldInclude ? <li className={classes.join(' ')} 
                                                 key={`gac_${game.gameKey}`} 
-                                                onClick={(e) => {this.chooseGame(game);}}>
+                                                onClick={(e) => {this.chooseGame(game);}}
+                                                onMouseEnter={(e) => {
+                                                    if(!this.isSelected(game))
+                                                    {
+                                                        this.setCurrentSuggestion(i,game);
+                                                    }
+                                                    }}>
                         {game.title}
                     </li> : null);
                 })}

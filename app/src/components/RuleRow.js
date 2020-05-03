@@ -104,11 +104,18 @@ class RuleRow extends React.Component
 
     handleRuleDelete = (e) => { 
         
-        if(window.confirm(`Are you sure you want to Delete the rule ${this.state.rule.rule} (${this.state.rule.drinks})?`))
+        if(this.state.editing)
         {
-            this.props.deleteRule(this.props.rule.gameKey,this.props.ruleIndex);
-
             this.setState({editing : false});
+        }
+        else
+        {
+            if(window.confirm(`Are you sure you want to Delete the rule ${this.state.rule.rule} (${this.state.rule.drinks})?`))
+            {
+                this.props.deleteRule(this.props.rule.gameKey,this.props.ruleIndex);
+    
+                this.setState({editing : false});
+            }
         }
     }
 

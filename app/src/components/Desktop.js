@@ -5,6 +5,7 @@ import Games from './Games';
 import Alert from './Alert';
 import SessionManager from './SessionManager';
 import {Link,withRouter} from 'react-router-dom';
+import ShortcutsModal from './ShortCutsModal';
 
 class Desktop extends React.Component
 {
@@ -21,6 +22,12 @@ class Desktop extends React.Component
     };
 
     static defaultProps =  {}
+
+    shortcuts = React.createRef();
+
+    showShortcuts = () => {
+        this.shortcuts.current.show();
+    }
 
     render()
     {
@@ -86,6 +93,7 @@ class Desktop extends React.Component
                             currentComboCount={this.props.currentComboCount}
                              /></div> 
                         : <div className="Desktop__alert-shell"><Alert tag="div" type="info">Choose a game from the left hand menu</Alert></div>}
+                <ShortcutsModal ref={this.shortcuts} />
             </main>);
     }
 }

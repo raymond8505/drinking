@@ -20,19 +20,6 @@
         margin-left: 0;
         
     };
-
-    li
-    {
-        @include animated;
-        padding: .2em .4em;
-
-        &:hover
-        {
-            background: $accent;
-            color: $background_light;
-        }
-        
-    }
 }
 
 .GameAutoComplete__suggestion
@@ -40,7 +27,7 @@
     @include animated;
     padding: .2em .4em;
 
-    &:hover
+    &--current
     {
         background: $accent;
         color: $background_light;

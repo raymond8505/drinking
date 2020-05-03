@@ -122,7 +122,7 @@ class Game extends React.Component
         {
             
                 return (parents && parents.length > 0 ? <ul className="Game__parents">{parents.map((parent) => {
-                    return <GamePill key={`pill_${parent.gameKey}`} game={parent} showCloseBtn={false} />
+                    return <GamePill linkGame={true} key={`pill_${parent.gameKey}`} game={parent} showCloseBtn={false} />
                 })}</ul> : null);
         }
         
@@ -152,6 +152,7 @@ class Game extends React.Component
     getSnapshotBeforeUpdate(prevProps,prevState)
     {
         this.gameScrollPostBeforeUpdate = this.shell.current ? this.shell.current.scrollTop : 0;
+        this.currentGameKey = this.props.index;
 
         return null;
     }
@@ -162,6 +163,8 @@ class Game extends React.Component
             
             if(this.shell.current)
                 this.shell.current.scrollTo(0,this.gameScrollPostBeforeUpdate);
+
+                
         }, 1);
 
         if(this.state.editing)

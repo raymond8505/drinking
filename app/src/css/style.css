@@ -1487,6 +1487,7 @@ span.GameListItem__title {
 .Game__parents {
   position: relative;
   display: flex;
+  align-items: flex-end;
   padding: 0;
   margin: 0; }
   .Game:not(.Game--editing) .Game__parents {
@@ -1937,17 +1938,11 @@ input.RuleRow__title-field {
   .GameAutoComplete__suggestions, .GameAutoComplete__suggestions li {
     display: block;
     margin-left: 0; }
-  .GameAutoComplete__suggestions li {
-    transition: all 0.2s ease-in-out 0s;
-    padding: .2em .4em; }
-    .GameAutoComplete__suggestions li:hover {
-      background: darkslateblue;
-      color: #fff; }
 
 .GameAutoComplete__suggestion {
   transition: all 0.2s ease-in-out 0s;
   padding: .2em .4em; }
-  .GameAutoComplete__suggestion:hover {
+  .GameAutoComplete__suggestion--current {
     background: darkslateblue;
     color: #fff; }
 

@@ -1,5 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 
 class GamePill extends React.Component
 {
@@ -8,12 +9,14 @@ class GamePill extends React.Component
         tag : PropTypes.string,
         onClick : PropTypes.func,
         onClose : PropTypes.func,
-        showCloseBtn : PropTypes.bool
+        showCloseBtn : PropTypes.bool,
+        linkGame : PropTypes.bool
     };
 
     static defaultProps = {
         tag : 'li',
-        showCloseBtn : true
+        showCloseBtn : true,
+        linkGame : false
     }
 
     onClose = (e) => {
@@ -27,7 +30,7 @@ class GamePill extends React.Component
 
         return (
             <Tag className={`GamePill GamePill--${this.props.game.gameKey}`}>
-                {this.props.game.title}
+                {this.props.linkGame ? <Link to={`/game/${this.props.game.gameKey}`}>{this.props.game.title}</Link> : this.props.game.title}
                 {this.props.showCloseBtn ? <button className="GamePill__close-btn" onClick={this.onClose}>&times;</button> : null}
             </Tag>);
     }
