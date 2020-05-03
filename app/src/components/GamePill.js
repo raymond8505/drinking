@@ -7,7 +7,7 @@ class GamePill extends React.Component
         game : PropTypes.object.isRequired,
         tag : PropTypes.string,
         onClick : PropTypes.func,
-        onClose : PropTypes.func.isRequired,
+        onClose : PropTypes.func,
         showCloseBtn : PropTypes.bool
     };
 

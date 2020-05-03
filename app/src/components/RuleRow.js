@@ -137,7 +137,7 @@ class RuleRow extends React.Component
         
         let user = this.props.getUser(ownerhash);
 
-        return <span class="RuleRow__owner">{user ? user.email : 'Unknown User'}</span>
+        return <span className="RuleRow__owner">{user ? user.email : 'Unknown User'}</span>
 
     }
     renderDrinks = () => {
@@ -183,7 +183,7 @@ class RuleRow extends React.Component
 
     closeOnEscape = (e) => {
 
-        if(e.which == 27)
+        if(e.which === 27)
         {
             this.setState({editing : false});
         }

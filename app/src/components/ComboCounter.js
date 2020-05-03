@@ -143,7 +143,7 @@ class ComboCounter extends React.Component
                     {this.props.count}
                 </div>
 
-                <div class="ComboCounter__glass-wrap">
+                <div className="ComboCounter__glass-wrap">
 
                     <div className="ComboCounter__shot-glass">
                         <div className="ComboCounter__shot-volume" style={{height : this.calcShotHeight()}}></div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 import GameMultiSelect from './GameMultiSelect';
-import DataHelper from '../DataHelper';
+//import DataHelper from '../DataHelper';
 
 //import {GENERAL_RULES_KEY} from '../constants';
 
@@ -81,7 +81,7 @@ class AddGameForm extends React.Component
     render()
     {
         //console.log(this.props);
-        let data = new DataHelper(this.props.games);
+        //let data = new DataHelper(this.props.games);
 
         return (
             <div className="AddGameForm">

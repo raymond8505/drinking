@@ -308,25 +308,38 @@ class App extends React.Component
 
     editRule = (gameKey,ruleKey,newRule) =>
     {
+        console.log(gameKey,ruleKey,newRule);
+
         let games = {...this.state.games};
 
         let game = games[gameKey];
         
         newRule.drinks = this.sanitizeDrinks(newRule.drinks);
-        
+
         if(game && game.rules && game.rules[ruleKey] && gameKey === newRule.gameKey)
         {
             games[gameKey].rules[ruleKey] = newRule;
         }
         else
         {
+            console.log('dif gam game');
+
             let oldGame = game;
             let newGame = games[newRule.gameKey];
 
-            if(oldGame && newGame && newGame.rules)
+            if(oldGame && newGame)
             {
+                if(!newGame.rules)
+                {
+                    newGame.rules = {};
+                }
+
                 games[gameKey].rules[ruleKey] = null;
                 games[newRule.gameKey].rules[ruleKey] = newRule;
+            }
+            else
+            {
+                
             }
         }
 

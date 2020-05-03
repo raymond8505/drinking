@@ -62,8 +62,8 @@ class Desktop extends React.Component
                         {this.props.user.email}
                     </span>
 
-                    <button class="App__shortcuts-ref" onClick={this.showShortcuts}>
-                        <i class="fa fa-keyboard-o"></i>
+                    <button className="App__shortcuts-ref" onClick={this.showShortcuts}>
+                        <i className="fa fa-keyboard-o"></i>
                     </button>
                 </header>
                 <Game 

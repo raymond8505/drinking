@@ -71,7 +71,7 @@ class DataHelper
 
             game.parent_game.map((parentKey) => {
                 
-                Object.assign(rules, _this.getGameRules(parentKey,false,order));
+                return Object.assign(rules, _this.getGameRules(parentKey,false,order));
 
             });
         }

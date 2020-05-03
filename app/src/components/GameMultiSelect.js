@@ -11,7 +11,6 @@ class GameMultiSelect extends React.Component
         games : PropTypes.object.isRequired,
         includeToplevel : PropTypes.bool,
         defaultValue : PropTypes.array,
-        ref : PropTypes.object,
         placeholder : PropTypes.string,
         onError : PropTypes.func.isRequired,
         selectedGames : PropTypes.array,

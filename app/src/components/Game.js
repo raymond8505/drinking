@@ -7,13 +7,13 @@ import AddRulesForm from './AddRulesForm';
 import GameList from './GameList';
 import AddGameForm from './AddGameForm';
 import {changePageTitle} from '../helpers';
-import GameSelect from './GameSelect';
+//import GameSelect from './GameSelect';
 import EditButton from './EditButton';
 //import GameListItem from './GameListItem';
 import DeleteButton from './DeleteButton';
 import {Link} from 'react-router-dom';
 import ComboCounter from './ComboCounter';
-import {GENERAL_RULES_KEY} from '../constants';
+//import {GENERAL_RULES_KEY} from '../constants';
 import GamePill from './GamePill';
 import GameMultiSelect from './GameMultiSelect';
 
@@ -122,7 +122,7 @@ class Game extends React.Component
         {
             
                 return (parents && parents.length > 0 ? <ul className="Game__parents">{parents.map((parent) => {
-                    return <GamePill game={parent} showCloseBtn={false} />
+                    return <GamePill key={`pill_${parent.gameKey}`} game={parent} showCloseBtn={false} />
                 })}</ul> : null);
         }
         
@@ -247,6 +247,7 @@ class Game extends React.Component
                         editGame={this.props.editGame} 
                         games={this.props.games}
                         deleteGame={this.props.deleteGame}
+                        copyGame={this.props.copyGame}
                         canEditGame={this.props.canEditGame}
                         canEditRule={this.props.canEditRule}
                         canDeleteGame={this.props.canDeleteGame}
@@ -258,7 +259,7 @@ class Game extends React.Component
 
                     {this.props.userLoggedIn() ? <AddGameForm
                         games={this.props.games}
-                        parent={this.props.index}
+                        parent={[this.props.index]}
                         addGame={this.props.addGame} /> : null }
                 </section>
             </div>);
