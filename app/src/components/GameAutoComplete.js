@@ -5,6 +5,17 @@ import { GENERAL_RULES_KEY } from '../constants';
 
 class GameAutoComplete extends React.Component
 {
+    constructor(props){
+
+        super(props);
+
+        this.state = {
+            suggestions : [],
+            selectedGames : [],
+            currentSelection : 0,
+            currentSuggestion : 0
+        }
+    }
     static propTypes = {
         games : PropTypes.object.isRequired,
         selectedGames : PropTypes.array.isRequired,
@@ -21,34 +32,44 @@ class GameAutoComplete extends React.Component
        includeGeneralRules : false
     }
 
-    static state = {
-        suggestions : [],
-        selectedGames : [],
-        currentSelection : 0,
-        currentSuggestion : 0
-    }
-
     titleField = React.createRef();
 
     data = new DataHelper(this.props.games);
 
     onTitleFieldKeyPress = (e) => {
 
-        if(e.which === 13)
-        {
-            e.preventDefault();
-        }
-        else
+        if(this.state && this.state.suggestions && !this.allSuggestionsSelected())
         {
             switch(e.which)
             {
                 case 40: //down / next
                     this.nextSuggestion();
                     break;
-            }
+                case 38: //up /previous
+                    this.previousSuggestion();
+                    break;
+                case 27: //esc / clear
+                    this.clearSuggestions();
+                    break;
+                case 13:
+                    
+                    let game = this.state.suggestions[this.state.currentSuggestion];
 
-            this.renderAutoComplete(e.target.value);
+
+                    if(game && game.gameKey)
+                    {
+                        this.chooseGame(game);
+                    }    
+
+                    e.preventDefault();
+                    break;
+                default :
+                    console.log(e.which);
+            }
         }
+
+        this.renderAutoComplete(e.target.value);
+        
     }
 
     isSelected = (game) => {
@@ -65,6 +86,16 @@ class GameAutoComplete extends React.Component
         }
 
         return success;
+    }
+
+    clearSuggestions = () => {
+        
+        this.titleField.current.value = '';
+        this.renderAutoComplete('');
+
+        this.setState({
+            currentSuggestion : 0
+        });
     }
 
     renderAutoComplete = (q) => {
@@ -112,6 +143,8 @@ class GameAutoComplete extends React.Component
         this.props.onGameSelect(game);
 
         this.clearTitleField();
+
+        this.titleField.current.focus();
     }
 
     clearTitleField = () => {
@@ -123,23 +156,39 @@ class GameAutoComplete extends React.Component
         this.setState({currentSuggestion : i});
     }
 
+    previousSuggestion = () => {
+
+        let previousSuggestion = this.findPreviousSuggestion(this.state.currentSuggestion || this.state.suggestions.length || 0);
+
+        this.setCurrentSuggestion(previousSuggestion);
+    }
+
+    findPreviousSuggestion = (current) => {
+
+        let prevIndex = current === 0 ? this.state.suggestions.length - 1 : current - 1;
+
+        console.log(current,prevIndex);
+
+        return this.isSelected(this.state.suggestions[prevIndex]) ? this.findPreviousSuggestion(prevIndex) : prevIndex;
+    }
+
     nextSuggestion = () => {
 
         let nextSuggestion = this.findNextSuggestion(this.state.currentSuggestion || 0);
 
-        this.setState({currentSuggestion : nextSuggestion});
+        this.setCurrentSuggestion(nextSuggestion);
     }
 
     findNextSuggestion = (current) => {
 
-        let nextIndex = current == this.state.suggestions.length - 1 ? 0 : current + 1;
+        let nextIndex = current === this.state.suggestions.length - 1 ? 0 : current + 1;
 
         return this.isSelected(this.state.suggestions[nextIndex]) ? this.findNextSuggestion(nextIndex) : nextIndex;
     }
 
     allSuggestionsSelected = () => {
 
-        let allSelected = true;
+        let allSelected = this.state.suggestions.length > 0;
 
         for(let i in this.state.suggestions)
         {
@@ -171,7 +220,7 @@ class GameAutoComplete extends React.Component
                         classes.push('GameAutoComplete__suggestion--selected');    
                     }
                     
-                    if(i === this.state.currentSuggestion || !this.state.currentSuggestion && i === 0)
+                    if(i === this.state.currentSuggestion || (!this.state.currentSuggestion && i === 0))
                     {
                         classes.push('GameAutoComplete__suggestion--current')
                     }
