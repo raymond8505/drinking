@@ -6,7 +6,7 @@ import RulesList from './RulesList';
 import AddRulesForm from './AddRulesForm';
 import GameList from './GameList';
 import AddGameForm from './AddGameForm';
-import {changePageTitle} from '../helpers';
+//import {changePageTitle} from '../helpers';
 //import GameSelect from './GameSelect';
 import EditButton from './EditButton';
 //import GameListItem from './GameListItem';
@@ -16,6 +16,7 @@ import ComboCounter from './ComboCounter';
 //import {GENERAL_RULES_KEY} from '../constants';
 import GamePill from './GamePill';
 import GameMultiSelect from './GameMultiSelect';
+import {Helmet} from "react-helmet";
 
 class Game extends React.Component
 {
@@ -186,10 +187,15 @@ class Game extends React.Component
 
         if(!game) return NotFound;
 
-        changePageTitle(game.title + ' | Drinking Games'); 
+        //changePageTitle(game.title + ' | Drinking Games'); 
         
         return (
             <div className={`Game ${this.state.editing ? ' Game--editing' : ''}`} ref={this.shell}>
+            <Helmet>
+                <title>
+                    {game.title + ' | Drinking Games'}
+                </title>
+            </Helmet>
                 <ComboCounter setSessionCombo={this.props.setSessionCombo} count={this.props.currentComboCount} />
                 {this.renderParentPills()}
                 <h1 className="Game__title">

@@ -8,10 +8,16 @@ import GameSelect from './GameSelect';
 
 class RuleRow extends React.Component
 {
-    state = {
-        editing : false,
-        rule : null
+    constructor(props)
+    {
+        super(props);
+
+        this.state = {
+            editing : false,
+            rule : null
+        }
     }
+    
 
     ruleField = React.createRef();
     drinksField = React.createRef();
@@ -48,6 +54,8 @@ class RuleRow extends React.Component
         //let drinksField = this.state.drinksField.current;
         //let ruleField = this.state.ruleField.current;
 
+        console.log(this.drinksField,this.ruleField);
+
         if(this.drinksField 
             && this.ruleField
             && this.drinksField.current
@@ -75,13 +83,15 @@ class RuleRow extends React.Component
             this.props.editRule(this.props.rule.gameKey,this.props.ruleIndex,ruleObj);
 
             this.setState({
-                rule : ruleObj,
-                editing : !editing
+                rule : ruleObj
             });
         }
-        /* this.setState({
-            editing : !editing});
+        
 
+        this.setState({
+            editing : !editing})
+
+            /*
         if(editing)
         {
             let rule = {
