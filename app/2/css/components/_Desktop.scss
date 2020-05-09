@@ -6,7 +6,7 @@
 
     .GameShell
     {
-        width: 100%;
+        width: 80%;
         margin-left: 1vw;
         //padding-left: 1vw;
         display: flex;
@@ -121,7 +121,7 @@
             {
                 .Game
                 {
-                    width: 100%;
+                    width: 75%;
                 }
 
                 .Games
@@ -138,7 +138,10 @@
     align-items: center;
     justify-content: center;
 }
-
+.EditButton__icon
+{
+    
+}
 .Desktop > .Games
 {
     position: fixed;
