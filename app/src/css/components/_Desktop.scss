@@ -6,7 +6,7 @@
 
     .GameShell
     {
-        width: 100%;
+        width: 80%;
         margin-left: 1vw;
         //padding-left: 1vw;
         display: flex;
@@ -121,7 +121,7 @@
             {
                 .Game
                 {
-                    width: 100%;
+                    width: 75%;
                 }
 
                 .Games
@@ -137,13 +137,4 @@
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.Desktop > .Games
-{
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 3;
-    height: 100vh;
 }

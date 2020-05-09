@@ -1512,7 +1512,7 @@ span.GameListItem__title {
   align-items: stretch;
   height: 100vh; }
   .Desktop .GameShell {
-    width: 100%;
+    width: 80%;
     margin-left: 1vw;
     display: flex;
     flex-direction: column;
@@ -1575,7 +1575,7 @@ span.GameListItem__title {
 
 @media (min-width: 1000px) and (max-width: 1300px) {
   .Desktop .Game {
-    width: 100%; }
+    width: 75%; }
   .Desktop .Games {
     width: 25%; } }
 
@@ -1584,13 +1584,6 @@ span.GameListItem__title {
   display: flex;
   align-items: center;
   justify-content: center; }
-
-.Desktop > .Games {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 3;
-  height: 100vh; }
 
 .Games .Games__add-a-game {
   margin-top: 2em;
