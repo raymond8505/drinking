@@ -6,6 +6,18 @@ import PropTypes from 'prop-types';
 
 class Games extends React.Component
 {
+    constructor(props)
+    {
+        super(props);
+
+        this.state = {
+            visible : true
+        };
+
+        setTimeout(() => {
+            this.setState({visible : false});
+        }, 1500);
+    }
     static propTypes = {
         editGame : PropTypes.func.isRequired,
         games : PropTypes.object.isRequired,
@@ -19,6 +31,12 @@ class Games extends React.Component
 
     data = null;
 
+    onToggleClick = (e) => {
+        this.setState({
+            visible : !this.state.visible
+        });
+    }
+
     render()
     {
         this.data = new DataHelper(this.props.games);
@@ -28,7 +46,14 @@ class Games extends React.Component
         //console.log(this.props.canDeleteGame);
         
         return (
-            <div className="Games">
+            <div className={`Games ${this.state.visible ? 'Games--visible' : ''}`}>
+                <button 
+                    type="button" 
+                    className="Games__toggle-btn"
+                    onClick={this.onToggleClick}
+                >
+                    {this.state.visible ? <i className="fa fa-chevron-left"></i> : <i class="fa fa-bars"></i>}
+                </button>
                 <h1>Drinking Games</h1>
 
                 <GameList 

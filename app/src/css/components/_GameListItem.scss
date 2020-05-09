@@ -19,11 +19,12 @@
         @include padding(horizontal,.4em);
     }
 }
-.GameListItem__title
+a.GameListItem__title
 {
     font-weight: bold;
     font-size: 1.1em;
-    color: inherit;
+    color: $background;
+    background: transparent;
 }
 
 span.GameListItem__title

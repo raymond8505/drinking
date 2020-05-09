@@ -1,7 +1,7 @@
 import React from 'react';
-import Games from './Games';
-import Game from './Game';
-import NotFound from './NotFound';
+//import Games from './Games';
+//import Game from './Game';
+//import NotFound from './NotFound';
 import fakeGames from '../fakeGames.js';
 import DataHelper from '../DataHelper';
 import Loader from './Loader';
@@ -679,68 +679,68 @@ class App extends React.Component
 
         let view = null;
         
-        if(this.state.mobile)
-        {
-            switch(this.props.mode)
-            {
-                case 'join' :
-                    let key = this.props.match.params.key;
+        // if(this.state.mobile)
+        // {
+        //     switch(this.props.mode)
+        //     {
+        //         case 'join' :
+        //             let key = this.props.match.params.key;
                     
-                    if(this.joinSession(key))
-                    {
-                        this.props.history.push('/');
-                    }
+        //             if(this.joinSession(key))
+        //             {
+        //                 this.props.history.push('/');
+        //             }
                     
-                    break;
-                case 'games' :
-                    view = <Games 
-                        games={this.state.games} 
-                        editGame={this.editGame} 
-                        addGame={this.addGame} 
-                        deleteGame={this.deleteGame}
-                        copyGame={this.copyGame}
-                        editRule={this.editRule} 
-                        deleteRule={this.deleteRule}
-                        addRule={this.addRule}
-                        mode={this.props.mode}
-                        match={this.props.match}
-                        canEditGame={this.canEditGame}
-                        canEditRule={this.canEditRule}
-                        canDeleteGame={this.canDeleteGame}
-                        canDeleteRule={this.canDeleteRule}
-                        userLoggedIn={this.userLoggedIn}
-                        getUser={this.getUser} />;
-                    break;
-                case 'game' :
-                    view = <Game 
-                            index={this.props.match.params.ID} 
-                            games={this.state.games} 
-                            editGame={this.editGame} 
-                            addGame={this.addGame} 
-                            deleteGame={this.deleteGame}
-                            copyGame={this.copyGame}
-                            editRule={this.editRule} 
-                            deleteRule={this.deleteRule}
-                            addRule={this.addRule}
-                            mode={this.props.mode}
-                            match={this.props.match}
-                            canEditGame={this.canEditGame}
-                            canEditRule={this.canEditRule}
-                            canDeleteGame={this.canDeleteGame}
-                            canDeleteRule={this.canDeleteRule}
-                            userLoggedIn={this.userLoggedIn}
-                            getUser={this.getUser}
-                            setSessionCombo={this.setSessionCombo} />;
-                    break;
-                case 'signup' :
-                    view = <Signup error={this.state.signupError} signup={this.signup} />;
-                    break;
-                default :
-                    view = <NotFound />;
-            }
-        }
-        else
-        {
+        //             break;
+        //         case 'games' :
+        //             view = <Games 
+        //                 games={this.state.games} 
+        //                 editGame={this.editGame} 
+        //                 addGame={this.addGame} 
+        //                 deleteGame={this.deleteGame}
+        //                 copyGame={this.copyGame}
+        //                 editRule={this.editRule} 
+        //                 deleteRule={this.deleteRule}
+        //                 addRule={this.addRule}
+        //                 mode={this.props.mode}
+        //                 match={this.props.match}
+        //                 canEditGame={this.canEditGame}
+        //                 canEditRule={this.canEditRule}
+        //                 canDeleteGame={this.canDeleteGame}
+        //                 canDeleteRule={this.canDeleteRule}
+        //                 userLoggedIn={this.userLoggedIn}
+        //                 getUser={this.getUser} />;
+        //             break;
+        //         case 'game' :
+        //             view = <Game 
+        //                     index={this.props.match.params.ID} 
+        //                     games={this.state.games} 
+        //                     editGame={this.editGame} 
+        //                     addGame={this.addGame} 
+        //                     deleteGame={this.deleteGame}
+        //                     copyGame={this.copyGame}
+        //                     editRule={this.editRule} 
+        //                     deleteRule={this.deleteRule}
+        //                     addRule={this.addRule}
+        //                     mode={this.props.mode}
+        //                     match={this.props.match}
+        //                     canEditGame={this.canEditGame}
+        //                     canEditRule={this.canEditRule}
+        //                     canDeleteGame={this.canDeleteGame}
+        //                     canDeleteRule={this.canDeleteRule}
+        //                     userLoggedIn={this.userLoggedIn}
+        //                     getUser={this.getUser}
+        //                     setSessionCombo={this.setSessionCombo} />;
+        //             break;
+        //         case 'signup' :
+        //             view = <Signup error={this.state.signupError} signup={this.signup} />;
+        //             break;
+        //         default :
+        //             view = <NotFound />;
+        //     }
+        // }
+        // else
+        // {
             switch(this.props.mode)
             {
                 case 'signup' :
@@ -783,7 +783,7 @@ class App extends React.Component
                     user={this.state.user} />
             }
             
-        }
+        //}
 
         //view = null;
         

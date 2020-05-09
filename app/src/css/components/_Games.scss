@@ -10,11 +10,16 @@
 }
 .Games
 {
-    
-
+    overflow: visible !important;
     display: flex; 
     //flex-wrap: wrap;
     flex-direction: column;
+    @include animated;
+
+    &:not(.Games--visible)
+    {
+        transform: translateX(-100%);
+    }
 
     > .GameList
     {
@@ -22,4 +27,15 @@
         flex-shrink: 1;
         overflow-y: auto;
     }
+}
+.Games__toggle-btn
+{
+    @include no-button-style;
+    position: absolute;
+    right: 0;
+    top: 2em;
+    transform: translateX(99%);
+    z-index: 2; 
+    color: $background_light;
+    background: lighten($color,5%);
 }

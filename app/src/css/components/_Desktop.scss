@@ -6,7 +6,7 @@
 
     .GameShell
     {
-        width: 80%;
+        width: 100%;
         margin-left: 1vw;
         //padding-left: 1vw;
         display: flex;
@@ -45,9 +45,14 @@
         flex-shrink: 0;
         flex-grow: 0;
         @include padding((right,bottom),0);
+
+        &, .Games__toggle-btn
+        {
+            
+        }
         background: lighten($color,5%);
         color: $background;
-        overflow: hidden;
+        //overflow: hidden;
 
         a
         {
@@ -59,7 +64,7 @@
         {
             &,*
             {
-                background: transparent !important;
+                //background: transparent !important;
             }
         }
 
@@ -137,4 +142,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.Desktop > .Games
+{
+    position: fixed;
+    height: 100vh;
+    min-width: 400px;
+    top: 0;
+    left: 0;
+    z-index: 2;
 }

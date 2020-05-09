@@ -1268,7 +1268,7 @@ button,
     display: inline-block;
     padding: .2em .6em;
     background: #ddd;
-    color: #111 !important;
+    color: #111;
     text-decoration: none; } }
 
 @media (min-width: 1000px) {
@@ -1303,10 +1303,11 @@ button,
     padding-left: 0.4em;
     padding-right: 0.4em; }
 
-.GameListItem__title {
+a.GameListItem__title {
   font-weight: bold;
   font-size: 1.1em;
-  color: inherit; }
+  color: #efefef;
+  background: transparent; }
 
 span.GameListItem__title {
   cursor: pointer; }
@@ -1512,7 +1513,7 @@ span.GameListItem__title {
   align-items: stretch;
   height: 100vh; }
   .Desktop .GameShell {
-    width: 80%;
+    width: 100%;
     margin-left: 1vw;
     display: flex;
     flex-direction: column;
@@ -1536,16 +1537,13 @@ span.GameListItem__title {
     padding-right: 0;
     padding-bottom: 0;
     background: #1e1e1e;
-    color: #efefef;
-    overflow: hidden; }
+    color: #efefef; }
     .Desktop .Games a {
       text-decoration: none; }
       .Desktop .Games a, .Desktop .Games a:link, .Desktop .Games a:visited {
         color: #efefef; }
       .Desktop .Games a:hover, .Desktop .Games a:active, .Desktop .Games a:focus {
         color: #efefef; }
-    .Desktop .Games button, .Desktop .Games button * {
-      background: transparent !important; }
     .Desktop .Games .EditButton__icon, .Desktop .Games .DeleteButton__icon, .Desktop .Games .GameListItem__copy-btn .fa {
       color: #a3a3a3;
       transition: all 0.2s ease-in-out 0s; }
@@ -1585,6 +1583,14 @@ span.GameListItem__title {
   align-items: center;
   justify-content: center; }
 
+.Desktop > .Games {
+  position: fixed;
+  height: 100vh;
+  min-width: 400px;
+  top: 0;
+  left: 0;
+  z-index: 2; }
+
 .Games .Games__add-a-game {
   margin-top: 2em;
   border-top: 1px solid #111;
@@ -1595,12 +1601,29 @@ span.GameListItem__title {
   padding-bottom: 1em; }
 
 .Games {
+  overflow: visible !important;
   display: flex;
-  flex-direction: column; }
+  flex-direction: column;
+  transition: all 0.2s ease-in-out 0s; }
+  .Games:not(.Games--visible) {
+    transform: translateX(-100%); }
   .Games > .GameList {
     flex-grow: 1;
     flex-shrink: 1;
     overflow-y: auto; }
+
+.Games__toggle-btn {
+  background: transparent;
+  border: none;
+  font-size: 1em;
+  border-radius: 0;
+  position: absolute;
+  right: 0;
+  top: 2em;
+  transform: translateX(99%);
+  z-index: 2;
+  color: #fff;
+  background: #1e1e1e; }
 
 input.RuleRow__title-field {
   width: 100%; }
