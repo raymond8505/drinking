@@ -86,21 +86,11 @@
 
         .GameList
         {
-            display: block;
+            //display: block;
             margin-right: .5em;
             //height: 300px;
 
-            &::-webkit-scrollbar {
-                width: 5px;
-            }
             
-            &::-webkit-scrollbar-thumb {
-                background: rgba($background,.5); 
-            }
-            
-            &::-webkit-scrollbar-track {
-                background: transparent; 
-            }
         }
 
         .GameSelect,

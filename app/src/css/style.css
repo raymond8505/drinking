@@ -1347,13 +1347,27 @@ span.GameListItem__title {
 
 .GameList {
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  display: flex;
+  flex-direction: column; }
   @media (max-width: 1620px) and (min-width: 1001px) {
     .GameList {
       font-size: .85em; } }
   @media (max-width: 1350px) and (min-width: 1001px) {
     .GameList {
       font-size: .75em; } }
+
+.GameList__items {
+  margin-left: 0;
+  padding-left: 0;
+  flex-grow: 1;
+  overflow: auto; }
+  .GameList__items::-webkit-scrollbar {
+    width: 5px; }
+  .GameList__items::-webkit-scrollbar-thumb {
+    background: rgba(239, 239, 239, 0.5); }
+  .GameList__items::-webkit-scrollbar-track {
+    background: transparent; }
 
 .EditButton__icon {
   color: green;
@@ -1583,14 +1597,7 @@ span.GameListItem__title {
       .Desktop .Games .EditButton__icon:hover, .Desktop .Games .DeleteButton__icon:hover, .Desktop .Games .GameListItem__copy-btn .fa:hover {
         color: #efefef; }
     .Desktop .Games .GameList {
-      display: block;
       margin-right: .5em; }
-      .Desktop .Games .GameList::-webkit-scrollbar {
-        width: 5px; }
-      .Desktop .Games .GameList::-webkit-scrollbar-thumb {
-        background: rgba(239, 239, 239, 0.5); }
-      .Desktop .Games .GameList::-webkit-scrollbar-track {
-        background: transparent; }
     .Desktop .Games .GameSelect,
     .Desktop .Games input {
       width: 100%;
@@ -1633,7 +1640,7 @@ span.GameListItem__title {
   display: flex;
   flex-direction: column;
   transition: all 0.2s ease-in-out 0s; }
-  .Games > .GameList {
+  .Games .GameList {
     flex-grow: 1;
     flex-shrink: 1;
     overflow-y: auto; }

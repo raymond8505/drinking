@@ -6,6 +6,14 @@ import GameListItem from './GameListItem';
 
 class GameList extends React.Component
 {
+    constructor(props)
+    {
+        super(props);
+
+        this.state = {
+            filter : ''
+        };
+    }
     static propTypes = {
         editGame : PropTypes.func.isRequired,
         deleteGame : PropTypes.func.isRequired,
@@ -25,7 +33,20 @@ class GameList extends React.Component
         this.data = new DataHelper(this.props.games);
     }
 
+    gameMatchesFilter = (gameKey) => {
+
+        if(this.state.filter === '') return true;
+
+        let game = this.data.getGameByKey(gameKey);
+        let title = game.title.toLowerCase();
+        let q = this.state.filter.toLowerCase();
+
+        return title.indexOf(q) > -1;
+    }
+
     renderGameList = () => {
+
+        let _this = this;
 
         if(!this.data || !this.data.hasData())
         {
@@ -46,24 +67,38 @@ class GameList extends React.Component
 
             childGames = this.data.sortGamesBy('title','asc',childGames);
 
-            return this.data.forEach((key) => <GameListItem 
-                deleteGame={this.props.deleteGame} 
-                editGame={this.props.editGame}
-                copyGame={this.props.copyGame} 
-                key={key} 
-                index={key} 
-                games={childGames} 
-                game={this.data.getGameByKey(key)}
-                highlight={this.props.currentIndex === key}
-                canEditGame={this.props.canEditGame}
-                canEditRule={this.props.canEditRule}
-                canDeleteGame={this.props.canDeleteGame}
-                userLoggedIn={this.props.userLoggedIn}
-                canDeleteRule={this.props.canEditRule} />,childGames);
+            return this.data.forEach((key) => {
+        
+                return this.gameMatchesFilter(key) ? <GameListItem 
+                    deleteGame={this.props.deleteGame} 
+                    editGame={this.props.editGame}
+                    copyGame={this.props.copyGame} 
+                    key={key} 
+                    index={key} 
+                    games={childGames} 
+                    game={this.data.getGameByKey(key)}
+                    highlight={this.props.currentIndex === key}
+                    canEditGame={this.props.canEditGame}
+                    canEditRule={this.props.canEditRule}
+                    canDeleteGame={this.props.canDeleteGame}
+                    userLoggedIn={this.props.userLoggedIn}
+                canDeleteRule={this.props.canEditRule} /> : null;
+            },childGames);
                 
         }
     }
 
+    handleFilterKeyUp = (e) => {
+
+        let q = e.currentTarget.value;
+
+        if(e.which === 27)
+        {
+            q = e.currentTarget.value = '';
+        }
+
+        this.setState({filter : q});
+    }
 
     render()
     {
@@ -73,9 +108,12 @@ class GameList extends React.Component
         
 
         return (
-            <ul className="GameList">
-                {this.renderGameList()}
-            </ul>);
+            <div className="GameList">
+                <input className="GameList__filter-field" placeholder="Find a Game" onKeyUp={this.handleFilterKeyUp} />
+                <ul className="GameList__items">
+                    {this.renderGameList()}
+                </ul>
+            </div>);
     }
 }
 

@@ -16,7 +16,7 @@
     flex-direction: column;
     @include animated;
 
-    > .GameList
+    .GameList
     {
         flex-grow: 1;
         flex-shrink: 1;
