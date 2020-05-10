@@ -99,7 +99,11 @@ class Game extends React.Component
 
         let game = this.data.getGameByKey(this.props.index);
 
-        if(window.confirm(`Are you sure you want to delete "${game.title}"?`))
+        if(this.state.editing)
+        {
+            this.setState({editing : false});
+        }
+        else if(window.confirm(`Are you sure you want to delete "${game.title}"?`))
         {
             this.props.deleteGame(this.props.index);
         }
@@ -198,7 +202,10 @@ class Game extends React.Component
             </Helmet>
                 <ComboCounter setSessionCombo={this.props.setSessionCombo} count={this.props.currentComboCount} />
                 {this.renderParentPills()}
-                <h1 className="Game__title">
+                <h1 className="Game__title" onDoubleClick={(e) => {
+                            
+                            this.handleTitleEditClick();
+                        }}>
                     <input 
                         name={this.props.index + Date.now()} 
                         key={this.props.index + Date.now()} 
@@ -208,10 +215,17 @@ class Game extends React.Component
                         ref={this.titleInput}
                         disabled={!this.state.editing}
                         className="Game__title-value editable"
-                        onKeyPress={(e) => {
-                            if(e.which === 13)
+                        
+                        onKeyUp={(e) => {
+
+                            switch(e.which)
                             {
-                                this.handleTitleEditClick();
+                                case 13:
+                                    this.handleTitleEditClick();
+                                    break;
+                                case 27:
+                                    this.setState({editing : false});
+                                    break;
                             }
                         }} />
                     {this.props.canEditGame(this.props.index) ? <div className="Game__parent-change-select">

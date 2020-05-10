@@ -80,6 +80,9 @@ class AddRulesForm extends React.Component
     render()
     {
         this.data = new DataHelper(this.props.games);
+
+        let parentGame = this.data.getGameByKey(this.props.gameIndex);
+        //console.log(parentGame);
         
         let games = this.data.sortGamesBy('title','asc',this.props.games);
         

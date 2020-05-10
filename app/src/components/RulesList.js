@@ -30,9 +30,18 @@ class RulesList extends React.Component
     {
         window.addEventListener('keydown',(e) => {
             
-            if(e.shiftKey && (e.metaKey || e.ctrlKey) && e.which === 70) //ctrl/cmd + shift + f
+            if(this.filterField && this.filterField.current)//ctrl/cmd + shift + f
             {
-                this.filterField.current.focus();
+                if((e.shiftKey && (e.metaKey || e.ctrlKey) && e.which === 70))
+                {
+                    this.filterField.current.focus();
+                }
+                else if(e.which === 27)
+                {
+                    this.filterField.current.value = '';
+                    this.filterField.current.blur();
+                    this.setState({currentFilter : ''});
+                }
             }
         })
     }
@@ -183,8 +192,8 @@ class RulesList extends React.Component
                             <th className="RulesList__game-cell" 
                                 data-field="game"
                                 onClick={this.onHeaderCellClick}>Game{this.renderSortLabel('game')}</th>
-                            <th className="RulesList__owner-cell" 
-                                data-field="owner">Owner</th>
+                            {/* <th className="RulesList__owner-cell" 
+                                data-field="owner">Owner</th> */}
                             <th className="RulesList__controls-cell">&nbsp;</th>
                         </tr>
                     </thead>

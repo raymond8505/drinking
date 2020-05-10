@@ -6,12 +6,17 @@
 
     .GameShell
     {
-        width: 100%;
+        width: 80%;
         margin-left: 1vw;
         //padding-left: 1vw;
         display: flex;
         flex-direction: column;
         justify-content: stretch;
+
+        @media (max-width: $phone_width)
+        {
+            width: 100%;
+        }
 
         .Game
         {
@@ -119,22 +124,6 @@
             color: $color;
         }
     }
-
-    @media (min-width: $phone_width)
-        {
-            @media (max-width: 1300px)
-            {
-                .Game
-                {
-                    width: 75%;
-                }
-
-                .Games
-                {
-                    width: 25%;
-                }
-            }
-        }
 }
 .Desktop__alert-shell
 {
@@ -144,12 +133,15 @@
     justify-content: center;
 }
 
-.Desktop > .Games
+@media (max-width: $phone_width)
 {
-    position: fixed;
-    height: 100vh;
-    min-width: 400px;
-    top: 0;
-    left: 0;
-    z-index: 2;
+    .Desktop > .Games
+    {
+        position: fixed;
+        height: 100vh;
+        min-width: 400px;
+        top: 0;
+        left: 0;
+        z-index: 2;
+    }
 }

@@ -11,11 +11,13 @@ class GameList extends React.Component
         deleteGame : PropTypes.func.isRequired,
         userLoggedIn : PropTypes.func.isRequired,
         games : PropTypes.object.isRequired, //the object of all raw games data from App.state.games
-        parent : PropTypes.string //the key of the parent game, for which to show child games. Undefined = top level games
+        parent : PropTypes.string, //the key of the parent game, for which to show child games. Undefined = top level games
+        currentIndex : PropTypes.string
     };
 
     static defaultProps =  {
-        parent : undefined
+        parent : undefined,
+        currentIndex : undefined
     }
 
     componentWillMount()
@@ -24,8 +26,6 @@ class GameList extends React.Component
     }
 
     renderGameList = () => {
-        
-        //console.log('render game list',this.props);
 
         if(!this.data || !this.data.hasData())
         {
@@ -38,7 +38,8 @@ class GameList extends React.Component
 
             //return null;
 
-            //console.log('list has data');
+            //console.log(this.props.currentIndex);
+            
             //this.prop
             let childGames = this.props.parent !== undefined ? 
                 this.data.getChildGames(this.props.parent) : this.data.sortGamesBy('title','asc',this.props.games);
@@ -53,6 +54,7 @@ class GameList extends React.Component
                 index={key} 
                 games={childGames} 
                 game={this.data.getGameByKey(key)}
+                highlight={this.props.currentIndex === key}
                 canEditGame={this.props.canEditGame}
                 canEditRule={this.props.canEditRule}
                 canDeleteGame={this.props.canDeleteGame}

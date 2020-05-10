@@ -22,11 +22,13 @@ class Games extends React.Component
         editGame : PropTypes.func.isRequired,
         games : PropTypes.object.isRequired,
         addGame : PropTypes.func.isRequired,
-        userLoggedIn : PropTypes.func.isRequired
+        userLoggedIn : PropTypes.func.isRequired,
+        currentIndex : PropTypes.string
     }
 
     static defaultProps =  {
-        parent : 'game0'
+        parent : 'game0',
+        currentIndex : undefined
     };
 
     data = null;
@@ -65,6 +67,7 @@ class Games extends React.Component
                     canDeleteGame={this.props.canDeleteGame}
                     canDeleteRules={this.props.canEditRules}
                     copyGame={this.props.copyGame}
+                    currentIndex={this.props.currentIndex}
                     userLoggedIn={this.props.userLoggedIn}
                      />
 

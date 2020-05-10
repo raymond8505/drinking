@@ -9,10 +9,15 @@
         font-size: .9em;
     }
 }
+.GameListItem--highlight
+{
+    background: $accent;
+}
 .GameListItem__header
 {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 
     button
     {
@@ -27,6 +32,17 @@ a.GameListItem__title
     background: transparent;
 }
 
+.Game .GameListItem__title
+{
+    color: $accent;
+}
+
+.Games .GameListItem__title
+{
+    color: $background;
+    border-color: $background;
+}
+
 span.GameListItem__title
 {
     cursor: pointer;
@@ -38,4 +54,17 @@ span.GameListItem__title
     cursor: pointer;
     color: $color;
     background: transparent !important;
+}
+.GameListItem__copy-btn,
+.GameListItem .DeleteButton,
+.GameListItem .EditButton
+{
+    &:hover,
+    &:hover .fa,
+    & .fa:hover
+    {
+        opacity: 1;
+        color: #fff;
+        background: transparent;
+    }
 }

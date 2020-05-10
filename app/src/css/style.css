@@ -1296,9 +1296,13 @@ button,
   .GameListItem .GameListItem {
     font-size: .9em; }
 
+.GameListItem--highlight {
+  background: darkslateblue; }
+
 .GameListItem__header {
   display: flex;
-  justify-content: space-between; }
+  justify-content: space-between;
+  align-items: center; }
   .GameListItem__header button {
     padding-left: 0.4em;
     padding-right: 0.4em; }
@@ -1308,6 +1312,13 @@ a.GameListItem__title {
   font-size: 1.1em;
   color: #efefef;
   background: transparent; }
+
+.Game .GameListItem__title {
+  color: darkslateblue; }
+
+.Games .GameListItem__title {
+  color: #efefef;
+  border-color: #efefef; }
 
 span.GameListItem__title {
   cursor: pointer; }
@@ -1321,9 +1332,28 @@ span.GameListItem__title {
   color: #111;
   background: transparent !important; }
 
+.GameListItem__copy-btn:hover,
+.GameListItem__copy-btn:hover .fa,
+.GameListItem__copy-btn .fa:hover,
+.GameListItem .DeleteButton:hover,
+.GameListItem .DeleteButton:hover .fa,
+.GameListItem .DeleteButton .fa:hover,
+.GameListItem .EditButton:hover,
+.GameListItem .EditButton:hover .fa,
+.GameListItem .EditButton .fa:hover {
+  opacity: 1;
+  color: #fff;
+  background: transparent; }
+
 .GameList {
   margin: 0;
   padding: 0; }
+  @media (max-width: 1620px) and (min-width: 1001px) {
+    .GameList {
+      font-size: .85em; } }
+  @media (max-width: 1350px) and (min-width: 1001px) {
+    .GameList {
+      font-size: .75em; } }
 
 .EditButton__icon {
   color: green;
@@ -1513,11 +1543,14 @@ span.GameListItem__title {
   align-items: stretch;
   height: 100vh; }
   .Desktop .GameShell {
-    width: 100%;
+    width: 80%;
     margin-left: 1vw;
     display: flex;
     flex-direction: column;
     justify-content: stretch; }
+    @media (max-width: 1000px) {
+      .Desktop .GameShell {
+        width: 100%; } }
     .Desktop .GameShell .Game {
       flex-grow: 1;
       padding-left: 0; }
@@ -1571,25 +1604,20 @@ span.GameListItem__title {
       background-color: #efefef !important;
       color: #111; }
 
-@media (min-width: 1000px) and (max-width: 1300px) {
-  .Desktop .Game {
-    width: 75%; }
-  .Desktop .Games {
-    width: 25%; } }
-
 .Desktop__alert-shell {
   flex-grow: 1;
   display: flex;
   align-items: center;
   justify-content: center; }
 
-.Desktop > .Games {
-  position: fixed;
-  height: 100vh;
-  min-width: 400px;
-  top: 0;
-  left: 0;
-  z-index: 2; }
+@media (max-width: 1000px) {
+  .Desktop > .Games {
+    position: fixed;
+    height: 100vh;
+    min-width: 400px;
+    top: 0;
+    left: 0;
+    z-index: 2; } }
 
 .Games .Games__add-a-game {
   margin-top: 2em;
@@ -1605,12 +1633,13 @@ span.GameListItem__title {
   display: flex;
   flex-direction: column;
   transition: all 0.2s ease-in-out 0s; }
-  .Games:not(.Games--visible) {
-    transform: translateX(-100%); }
   .Games > .GameList {
     flex-grow: 1;
     flex-shrink: 1;
     overflow-y: auto; }
+  @media (max-width: 1000px) {
+    .Games:not(.Games--visible) {
+      transform: translateX(-100%); } }
 
 .Games__toggle-btn {
   background: transparent;
@@ -1624,6 +1653,9 @@ span.GameListItem__title {
   z-index: 2;
   color: #fff;
   background: #1e1e1e; }
+  @media (min-width: 1001px) {
+    .Games__toggle-btn {
+      display: none; } }
 
 input.RuleRow__title-field {
   width: 100%; }

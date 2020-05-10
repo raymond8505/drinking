@@ -16,16 +16,22 @@
     flex-direction: column;
     @include animated;
 
-    &:not(.Games--visible)
-    {
-        transform: translateX(-100%);
-    }
-
     > .GameList
     {
         flex-grow: 1;
         flex-shrink: 1;
         overflow-y: auto;
+    }
+
+    @media (max-width: $phone_width)
+    {
+
+        &:not(.Games--visible)
+        {
+            transform: translateX(-100%);
+        }
+    
+        
     }
 }
 .Games__toggle-btn
@@ -38,4 +44,9 @@
     z-index: 2; 
     color: $background_light;
     background: lighten($color,5%);
+
+    @media (min-width: $phone_width + 1)
+    {
+        display: none;
+    }
 }

@@ -222,9 +222,9 @@ class RuleRow extends React.Component
                 <td className="RuleRow__game-cell">
                     {this.renderGame(game)}
                 </td>
-                <td className="RuleRow__owner-cell">
+                {/* <td className="RuleRow__owner-cell">
                     {this.renderOwner(this.props.rule.owner)}
-                </td>
+                </td> */}
                 <td className="RuleRow__controls-cell">
                     {this.props.canEditRule(this.props.rule) ? <EditButton handler={this.handleRuleEdit} /> : null}
                     {this.props.canDeleteRule(this.props.rule) ? <DeleteButton handler={this.handleRuleDelete} /> : null}

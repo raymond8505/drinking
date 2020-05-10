@@ -8,12 +8,17 @@ import DataHelper from '../DataHelper';
 
 class GameListItem extends React.Component
 {
-    titleField = React.createRef();
+    constructor(props)
+    {
+        super(props);
 
-    state = {
-        editing :false,
-        game : {}
+        this.state = {
+            editing :false,
+            game : {}
+        }
     }
+
+    titleField = React.createRef();
 
     static propTypes = {
         index : PropTypes.string.isRequired,
@@ -23,11 +28,13 @@ class GameListItem extends React.Component
         editGame : PropTypes.func.isRequired,
         deleteGame : PropTypes.func.isRequired,
         copyGame : PropTypes.func.isRequired,
-        userLoggedIn : PropTypes.func.isRequired
+        userLoggedIn : PropTypes.func.isRequired,
+        highlight : PropTypes.bool
     };
 
     static defaultProps =  {
-        showChildren :  false
+        showChildren :  false,
+        highlight : false
     }
 
     onAddEditClick = (e) => {
@@ -60,9 +67,14 @@ class GameListItem extends React.Component
     //onClick={(e) => this.props.history.push(`/game/${this.props.index}`)} 
     onNameInputKeyPress = (e) => {
         
-        if(e.which === 13) //enter
+        switch(e.which)
         {
-            this.onAddEditClick();
+            case 13: //enter
+                this.onAddEditClick();
+                break;
+            case 27: //esc
+                this.setState({editing : false});
+                break;
         }
     }
     renderName = () => {
@@ -71,7 +83,7 @@ class GameListItem extends React.Component
                         name="GameListItem__title" 
                         ref={this.titleField} 
                         className="GameListItem__title editable" 
-                        onKeyPress={this.onNameInputKeyPress}
+                        onKeyUp={this.onNameInputKeyPress}
         defaultValue={this.game.title} />;
         const link = <Link 
                         to={`/game/${this.props.index}`}
@@ -111,12 +123,12 @@ class GameListItem extends React.Component
 
         this.game = this.data.getGameByKey(this.props.index);
 
-        //console.log(this.game);
+        //console.log(this.game.title,this.props.highlight);
 
         //console.log(this.props.canDeleteGame);
 
         return (
-            <li className="GameListItem" id={this.props.index} onDoubleClick={this.handleDoubleClick}>
+            <li className={`GameListItem ${this.props.highlight ? ' GameListItem--highlight' : ''}`} id={this.props.index} onDoubleClick={this.handleDoubleClick}>
                 <header className="GameListItem__header">
                     {this.renderName()}
 

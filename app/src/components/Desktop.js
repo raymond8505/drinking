@@ -18,10 +18,13 @@ class Desktop extends React.Component
         editGame : PropTypes.func.isRequired,
         addGame : PropTypes.func.isRequired,
         userLoggedIn : PropTypes.func.isRequired,
-        getUser : PropTypes.func.isRequired
+        getUser : PropTypes.func.isRequired,
+        currentIndex : PropTypes.string
     };
 
-    static defaultProps =  {}
+    static defaultProps =  {
+        currentIndex : undefined
+    }
 
     shortcuts = React.createRef();
 
@@ -48,6 +51,7 @@ class Desktop extends React.Component
                     copyGame={this.props.copyGame}
                     userLoggedIn={this.props.userLoggedIn}
                     getUser={this.props.getUser}
+                    currentIndex={this.props.match.params.ID}
                      />
 
                 {this.props.mode === 'game' ? <div className="GameShell">
