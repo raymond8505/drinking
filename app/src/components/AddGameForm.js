@@ -15,7 +15,7 @@ class AddGameForm extends React.Component
     };
 
     static defaultProps =  {
-        parent : ['game0'],
+        parent : [],
         listenForShortcuts : false
     };
 
@@ -80,7 +80,7 @@ class AddGameForm extends React.Component
 
     render()
     {
-        //console.log(this.props);
+        console.log(this.props.parent);
         //let data = new DataHelper(this.props.games);
 
         return (
@@ -88,7 +88,7 @@ class AddGameForm extends React.Component
                 {/* <label>Parent Game</label>  */}<GameMultiSelect
                     games={this.props.games}
                     includeToplevel={true}
-                    defaultValue={this.props.parent}
+                    selectedGames={this.props.parent}
                     ref={this.gameSelect}
                     placeholder="Add a Parent Game"
                     onError={this.onMultiSelectError}

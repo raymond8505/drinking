@@ -226,6 +226,7 @@ class Game extends React.Component
                                 case 27:
                                     this.setState({editing : false});
                                     break;
+                                default : break;
                             }
                         }} />
                     {this.props.canEditGame(this.props.index) ? <div className="Game__parent-change-select">
@@ -282,7 +283,7 @@ class Game extends React.Component
 
                     {this.props.userLoggedIn() ? <AddGameForm
                         games={this.props.games}
-                        parent={[this.props.index]}
+                        parent={[this.data.getGameByKey(this.props.index)]}
                         addGame={this.props.addGame} /> : null }
                 </section>
             </div>);

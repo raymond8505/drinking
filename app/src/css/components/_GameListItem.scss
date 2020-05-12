@@ -31,7 +31,14 @@ a.GameListItem__title
     color: $background;
     background: transparent;
 }
-
+.GameListItem__title
+{
+    flex-grow: 1;
+}
+input.GameListItem__title
+{
+    width: auto;
+}
 .Game .GameListItem__title
 {
     color: $accent;

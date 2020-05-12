@@ -11,6 +11,8 @@ body,html
     font-size: 16px;
     color: $color;
     background-color: $background;
+    height: 100vh;
+    overflow: hidden;
 }
 
 ::selection {

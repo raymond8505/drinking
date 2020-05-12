@@ -46,8 +46,6 @@ class GameList extends React.Component
 
     renderGameList = () => {
 
-        let _this = this;
-
         if(!this.data || !this.data.hasData())
         {
             //console.log('te');
@@ -104,12 +102,17 @@ class GameList extends React.Component
     {
         this.data = new DataHelper(this.props.games);
 
-        //console.log('game list render');
+        let childGames = this.props.parent !== undefined ? 
+            this.data.getChildGames(this.props.parent) : this.data.sortGamesBy('title','asc',this.props.games);
+        
+            let childGamesCount = Object.keys(childGames).length;
+            
+        console.log(childGamesCount);
         
 
         return (
             <div className="GameList">
-                <input className="GameList__filter-field" placeholder="Find a Game" onKeyUp={this.handleFilterKeyUp} />
+                {childGamesCount > 0 ? <input className="GameList__filter-field" placeholder="Find a Game" onKeyUp={this.handleFilterKeyUp} /> : null}
                 <ul className="GameList__items">
                     {this.renderGameList()}
                 </ul>

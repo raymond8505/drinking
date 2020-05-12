@@ -51,7 +51,12 @@ class GameListItem extends React.Component
     }
 
     onDeleteClick = (e) => {
-        if(window.confirm(`Are you sure you want to delete "${this.game.title}"`))
+
+        if(this.state.editing)
+        {
+            this.setState({editing : false});
+        }
+        else if(window.confirm(`Are you sure you want to delete "${this.game.title}"`))
         {
             this.props.deleteGame(this.props.index);
         }
@@ -75,6 +80,7 @@ class GameListItem extends React.Component
             case 27: //esc
                 this.setState({editing : false});
                 break;
+            default : break;
         }
     }
     renderName = () => {

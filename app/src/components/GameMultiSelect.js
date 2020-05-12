@@ -7,6 +7,16 @@ import DataHelper from '../DataHelper';
 
 class GameMultiSelect extends React.Component
 {
+    constructor(props)
+    {
+        super(props);
+
+        this.state = {
+            selectedGames : this.props.selectedGames,
+            includeToplevel : true
+        }
+    }
+
     static propTypes = {
         games : PropTypes.object.isRequired,
         includeToplevel : PropTypes.bool,
@@ -19,12 +29,8 @@ class GameMultiSelect extends React.Component
 
     static defaultProps = {
         selectedGames : [],
-        excludedGames : []
-    }
-
-    state = {
-        selectedGames : this.props.selectedGames,
-        includeToplevel : true
+        excludedGames : [],
+        defaultValue : []
     }
 
     /*
@@ -92,6 +98,7 @@ class GameMultiSelect extends React.Component
         
         return this.state.selectedGames.map((game) => {
             
+
             return (<GamePill 
                         key={`gms_${game.gameKey}`} 
                         game={game}

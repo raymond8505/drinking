@@ -1197,7 +1197,9 @@ body, html {
   font-family: Roboto, Helvetica, SanFransisco, Arial, _sans;
   font-size: 16px;
   color: #111;
-  background-color: #efefef; }
+  background-color: #efefef;
+  height: 100vh;
+  overflow: hidden; }
 
 ::selection {
   background-color: rgba(72, 61, 139, 0.9);
@@ -1313,6 +1315,12 @@ a.GameListItem__title {
   color: #efefef;
   background: transparent; }
 
+.GameListItem__title {
+  flex-grow: 1; }
+
+input.GameListItem__title {
+  width: auto; }
+
 .Game .GameListItem__title {
   color: darkslateblue; }
 
@@ -1368,6 +1376,13 @@ span.GameListItem__title {
     background: rgba(239, 239, 239, 0.5); }
   .GameList__items::-webkit-scrollbar-track {
     background: transparent; }
+
+.GameList__filter-field {
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  border-bottom: 1px solid #fff;
+  color: #fff;
+  padding: .3em; }
 
 .EditButton__icon {
   color: green;
@@ -1545,8 +1560,12 @@ span.GameListItem__title {
     background-color: #fff;
     width: 100%;
     z-index: 999; }
+  @media (max-width: 1000px) {
+    .Game__parents {
+      padding-left: 3em;
+      margin-top: 1em; } }
 
-.Game:not(.Game--editing) .GamePill {
+.Game:not(.Game--editing) .Game__parents .GamePill {
   background-color: #dbdbdb;
   color: #111;
   margin-left: 0;
@@ -1555,7 +1574,8 @@ span.GameListItem__title {
 .Desktop {
   display: flex;
   align-items: stretch;
-  height: 100vh; }
+  height: 100vh;
+  overflow: hidden; }
   .Desktop .GameShell {
     width: 80%;
     margin-left: 1vw;
@@ -1655,7 +1675,7 @@ span.GameListItem__title {
   border-radius: 0;
   position: absolute;
   right: 0;
-  top: 2em;
+  top: 3em;
   transform: translateX(99%);
   z-index: 2;
   color: #fff;
@@ -1803,7 +1823,8 @@ input.RuleRow__title-field {
 .Game .AddGameForm {
   margin-top: 2em;
   border-top: 1px solid rgba(17, 17, 17, 0.4);
-  padding-top: 1em; }
+  padding-top: 1em;
+  position: relative; }
 
 .ComboCounter {
   transition: all 0.3s ease-in-out 0s;
@@ -2003,7 +2024,8 @@ input.RuleRow__title-field {
 
 .GameAutoComplete__suggestion {
   transition: all 0.2s ease-in-out 0s;
-  padding: .2em .4em; }
+  padding: .2em .4em;
+  cursor: pointer; }
   .GameAutoComplete__suggestion--current {
     background: darkslateblue;
     color: #fff; }

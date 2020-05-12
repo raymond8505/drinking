@@ -34,3 +34,11 @@
         background: transparent; 
     }
 }
+.GameList__filter-field
+{
+    background: rgba($background_light,.05);
+    border: none;
+    border-bottom: 1px solid $background_light;
+    color: $background_light;
+    padding: .3em;
+}

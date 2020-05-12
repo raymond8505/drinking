@@ -56,10 +56,10 @@ class Desktop extends React.Component
 
                 {this.props.mode === 'game' ? <div className="GameShell">
                 <header className="App__header">
-                    <span>
+                    {/* <span>
                         <Link to="/" className="App__home-link">Home</Link>
                         {this.props.renderAuthButton()}
-                    </span>
+                    </span> */}
 
                     <SessionManager
                         createSession={this.props.createSession}

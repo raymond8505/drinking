@@ -93,8 +93,14 @@
         width: 100%;
         z-index: 999;
     }
+
+    @media (max-width: $phone_width)
+    {
+        padding-left: $mobile_menu_toggle_width;
+        margin-top: 1em;
+    }
 }
-.Game:not(.Game--editing) .GamePill
+.Game:not(.Game--editing) .Game__parents .GamePill
 {
     background-color: darken($background,8%);
     color: $color;
