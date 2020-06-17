@@ -107,7 +107,7 @@ class GameList extends React.Component
         
             let childGamesCount = Object.keys(childGames).length;
             
-        console.log(childGamesCount);
+        //console.log(childGamesCount);
         
 
         return (

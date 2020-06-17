@@ -50,3 +50,16 @@
         display: none;
     }
 }
+.Games__site-title
+{
+    display: flex;
+    justify-content: space-between;
+    padding-right: 1rem;
+
+    .App__auth-button
+    {
+        font-size: 1rem;
+        color: $background_light;
+        border-color: $background_light;
+    }
+}

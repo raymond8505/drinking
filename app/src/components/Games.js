@@ -56,7 +56,12 @@ class Games extends React.Component
                 >
                     {this.state.visible ? <i className="fa fa-chevron-left"></i> : <i class="fa fa-bars"></i>}
                 </button>
-                <h1>Drinking Games</h1>
+
+                <h1 className="Games__site-title">
+                    <span className="Games__tite-title-label">Drinking Games</span>
+                    {this.props.renderAuthButton()}
+                    
+                </h1>
 
                 <GameList 
                     games={games} 

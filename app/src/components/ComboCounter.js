@@ -3,20 +3,26 @@ import PropTypes from 'prop-types';
 
 class ComboCounter extends React.Component
 {
+    constructor(props)
+    {
+        super(props);
+
+        this.state = {
+            //count : 0,
+            animating : false,
+            open : false
+        }
+    }
     static propTypes = {
         setSessionCombo : PropTypes.func.isRequired,
         count : PropTypes.number
     };
     
-    static defaultTypes = {
+    static defaultProps = {
         count : 0
     };
 
-    state = {
-        //count : 0,
-        animating : false,
-        open : true
-    }
+    
 
     maxCombo = 10;
 
@@ -132,6 +138,8 @@ class ComboCounter extends React.Component
 
     render()
     {
+        console.log(this.state);
+
         return (
             <aside className={`ComboCounter${this.state.animating ? ' ComboCounter--animating' : ' ComboCounter--animated'}${this.props.count === this.maxCombo ? ' ComboCounter--full' : ''}${this.props.count === 0 ? ' ComboCounter--empty' : ''}${this.state.open ? ' ComboCounter--open' : ' ComboCounter--closed'}`}>
                 

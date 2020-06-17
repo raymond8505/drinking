@@ -4,7 +4,7 @@ import Game from './Game';
 import Games from './Games';
 import Alert from './Alert';
 import SessionManager from './SessionManager';
-import {Link,withRouter} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import ShortcutsModal from './ShortCutsModal';
 
 class Desktop extends React.Component
@@ -52,14 +52,12 @@ class Desktop extends React.Component
                     userLoggedIn={this.props.userLoggedIn}
                     getUser={this.props.getUser}
                     currentIndex={this.props.match.params.ID}
+                    renderAuthButton={this.props.renderAuthButton}
                      />
 
                 {this.props.mode === 'game' ? <div className="GameShell">
                 <header className="App__header">
-                    {/* <span>
-                        <Link to="/" className="App__home-link">Home</Link>
-                        {this.props.renderAuthButton()}
-                    </span> */}
+                    
 
                     <SessionManager
                         createSession={this.props.createSession}

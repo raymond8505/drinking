@@ -11,8 +11,8 @@ import firebase from 'firebase';
 import base from '../base';
 import Signup from './Signup';
 import {GENERAL_RULES_KEY,RAYMOND_UID} from '../constants';
-import {Link,withRouter} from 'react-router-dom';
 import ShortCutsModal from './ShortCutsModal';
+import {Link} from 'react-router-dom';
 
 class App extends React.Component
 {
@@ -626,15 +626,17 @@ class App extends React.Component
     renderAuthButton = () => {
         
         //<button className="App__login-button" onClick={this.onLoginClick}>Log In</button>
-        //button onClick={this.logout} className="App__logout">Turn Down</button>
+        //<button onClick={this.logout} className="App__logout">Turn Down</button>
         //<Link to="/signup" className="button-link App__sign-up-btn">Signup</Link>
 
+        console.log(this.state.user);
+        
         if(this.state.user.uid === '')
         {
             return (
                 <span>
-                    <button className="App__login-button link-button" onClick={this.onLoginClick}>Log In</button>
-                    <Link to="/signup" className="App__sign-up-btn">Signup</Link>
+                    <button className="App__auth-button App__auth-button--login link-button" onClick={this.onLoginClick}>Log In</button>
+                    <Link to="/signup" className="App__auth-button App__auth-button--signup link-button">Signup</Link>
                 </span>
             );
         }
@@ -642,7 +644,7 @@ class App extends React.Component
         {
             return (
                 <span>
-                    <button onClick={this.logout} className="App__logout-button link-button">Turn Down</button>
+                    <button onClick={this.logout} className="App__auth-button App__auth-button--signout link-button">Turn Down</button>
                 </span>
             );
         }
@@ -798,4 +800,4 @@ class App extends React.Component
     }
 }
 
-export default withRouter(App);
+export default App;

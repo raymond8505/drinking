@@ -1684,6 +1684,15 @@ span.GameListItem__title {
     .Games__toggle-btn {
       display: none; } }
 
+.Games__site-title {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 1rem; }
+  .Games__site-title .App__auth-button {
+    font-size: 1rem;
+    color: #fff;
+    border-color: #fff; }
+
 input.RuleRow__title-field {
   width: 100%; }
 
