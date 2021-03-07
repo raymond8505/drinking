@@ -1,0 +1,17 @@
+.GridPicker {
+  display: grid;
+  gap: 2px;
+  grid-template-rows: repeat(5, 40px);
+  grid-template-columns: repeat(5, 40px);
+  button {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+}
+button.GridPicker__btn {
+  background-color: rgba($color, 0.1);
+}
+button.GridPicker__btn--highlight {
+  background-color: rgba($green, 0.4);
+}

@@ -1,12 +1,17 @@
 .GamePill
 {
+    @include animated;
     margin: .15rem .3rem;
     color: $background_light;
     background-color: $accent;
-    padding: .2em .3em;
+    padding: .2em .5em;
     border-radius: .5em;
     font-weight: bold;
-
+    
+}
+.GamePill:not(.GamePill--visible)
+{
+    opacity: .5;
 }
 .Desktop .Games .Games__add-a-game .GamePill__close-btn,
 .Desktop .Game .GamePill__close-btn

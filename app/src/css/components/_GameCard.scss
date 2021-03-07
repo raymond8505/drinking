@@ -1,0 +1,68 @@
+.GameCard {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: auto;
+  gap: 0.5em;
+  width: 100vw;
+  min-height: 100vh;
+  background: $background_light;
+}
+.rule-box,
+.header-box {
+  padding: 0.5em;
+}
+.rule-box {
+  background: $background;
+  width: 100%;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.rule-box--free {
+  background-color: $background_light;
+
+  h1 {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  h2 {
+    font-size: 1.2rem;
+  }
+  h1,
+  h2 {
+    margin: 0;
+  }
+
+  h2 {
+    color: $green;
+  }
+}
+.rule-box__drinks {
+  font-size: 1.5em;
+  font-weight: bold;
+  padding: 0.5em;
+}
+.rule-box__game-title {
+  font-size: 0.75em;
+}
+
+.rule-box:not(.rule-box--free) .rule-box__rule {
+  font-size: 0.9em;
+}
+.header-box {
+  font-size: 2rem;
+  line-height: 1;
+  font-weight: $fw_black;
+  background-color: $color;
+  color: $background;
+}
+.rule-box--highlighted:not(.rule-box--free) {
+  background-color: $green;
+  color: $background_light;
+}
+.rule-box--game-rule:not(.rule-box--highlighted) .rule-box__game-title {
+  font-weight: bold;
+  color: $red;
+}

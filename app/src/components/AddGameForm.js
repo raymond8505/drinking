@@ -80,7 +80,7 @@ class AddGameForm extends React.Component
 
     render()
     {
-        console.log(this.props.parent);
+        //console.log(this.props.parent);
         //let data = new DataHelper(this.props.games);
 
         return (

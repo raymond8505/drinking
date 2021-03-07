@@ -1,0 +1,42 @@
+.Slider__controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.Slider__track {
+  margin: 0 1em;
+  position: relative;
+  flex-grow: 1;
+  cursor: pointer;
+  &:before {
+    content: "";
+    height: 1px;
+    width: 100%;
+    background: rgba($color, 0.35);
+    position: absolute;
+    top: 50%;
+    left: 0;
+  }
+}
+.Slider__title {
+  margin: 0;
+  font-size: 0.8em;
+  font-weight: bold;
+  color: $green;
+}
+.Slider__handle {
+  @include animated($speed: 0.075s);
+  text-align: center;
+  display: inline-block;
+
+  * {
+    pointer-events: none;
+  }
+}
+.Slider__current-value {
+  font-size: 0.75em;
+}
+.Slider__handle-bar .fa-caret-down {
+  font-size: 1.5em;
+}

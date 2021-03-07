@@ -7,6 +7,7 @@
     "autoprefixer": "latest",
     "chalk": "^1.1.3",
     "del": "^3.0.0",
+    "ftp": "^0.3.10",
     "gulp-clean-css": "^3.4.2",
     "gulp-concat": "^2.6.1",
     "gulp-minify": "^1.0.0",
@@ -14,6 +15,7 @@
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.0",
     "ncp": "^2.0.0",
+    "node-sass": "^5.0.0",
     "postcss-clip-path-polyfill": "latest",
     "react-helmet": "^6.0.0"
   },
@@ -21,7 +23,11 @@
     "gulp": "latest"
   },
   "scripts": {
-    "test": "makefolders"
+    "test": "makefolders",
+    "deploy": "node deploy.js",
+    "sass": "node-sass --output-style compressed -w ./app/src/css",
+    "start": "cd ./app && npm start",
+    "build": "cd ./app && npm run build"
   },
   "author": "Raymond Selzer",
   "license": "ISC"

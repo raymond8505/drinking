@@ -1,111 +1,124 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap");
 @import url(https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
 
 @import "variables";
 
-@import "../../../../common/scss-lib/bourbon/bourbon";
-@import "../../../../common/scss-lib/framework/framework";
+@import "C:/Users/Raymond/Dropbox/server/common/scss-lib/bourbon/bourbon";
+@import "../../../../../common/scss-lib/framework/mixins";
+@import "C:/Users/Raymond/Dropbox/server/common/scss-lib/framework/framework";
 
-body,html
-{
-    font-family: Roboto, Helvetica, SanFransisco, Arial, _sans;
-    font-size: 16px;
-    color: $color;
-    background-color: $background;
-    height: 100vh;
-    overflow: hidden;
+body,
+html {
+  font-family: "Open Sans", Roboto, Helvetica, SanFransisco, Arial, _sans;
+  font-size: 16px;
+  color: $color;
+  background-color: $background;
+  height: 100vh;
+  overflow: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  &,
+  & * {
+    font-weight: $fw_light;
+  }
+
+  input,
+  button {
+    line-height: 1.35;
+  }
 }
 
 ::selection {
-    background-color: rgba($accent,.9);
-    color: $background;
+  background-color: rgba($accent, 0.9);
+  color: $background;
 }
 
-table
-{
-    td,th
-    {
-        padding: .2em .4em;
-    }
+table {
+  td,
+  th {
+    padding: 0.2em 0.4em;
+  }
 
-    tr:nth-child(even)
-    {
-        background: rgba($color,.05);
-    }
+  tr:nth-child(even) {
+    background: rgba($color, 0.05);
+  }
 
-    thead
-    {
-        background: rgba($color,.2);
-    }
+  thead {
+    background: rgba($color, 0.2);
+  }
 }
 
-a
-{
-    @include default_link_color($accent,darkgreen);
-    @include animated(color);
+a {
+  @include default_link_color($accent, darkgreen);
+  @include animated(color);
 }
 
-.editable
-{
-    border: none;
-    border-radius: 0;
-    border-bottom: 2px solid transparent;
-    background: transparent;
+.editable {
+  border: none;
+  border-radius: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
 
-    &:not([disabled])
-    {
-        border-bottom-color: $color;
-        font-weight: bold;
-    }
+  &:not([disabled]) {
+    border-bottom-color: $color;
+    font-weight: bold;
+  }
 }
 
 button,
-.button-link
-{
-    //border: 1px solid #999;
-    padding: .3em .8em;
-    border-radius: 2px;
-    background: $accent;
-    color: #fff;
-    @include animated;
+.button-link {
+  //border: 1px solid #999;
+  padding: 0.3em 0.8em;
+  border-radius: 2px;
+  background: $accent;
+  color: #fff;
+  @include animated;
 
-    &:hover
-    {
-        background: $background;
-        color: $color;
-    }
+  &:hover {
+    background: $background;
+    color: $color;
+  }
 }
-.button-link
-{
-    display: inline-block;
-    text-decoration: none !important;
-    color: $color !important;
+.button-link {
+  display: inline-block;
+  text-decoration: none !important;
+  color: $color !important;
 }
 
 .link-btn,
-.link-button
-{
-    @include no-button-style;
-    text-decoration: underline;
-    color: $color;
-    background: transparent !important;
+.link-button {
+  @include no-button-style;
+  text-decoration: underline;
+  color: $color;
+  background: transparent !important;
 }
 
-@keyframes blink{
-    0%{opacity: 0;}
-    50%{opacity: .5;}
-    100%{opacity: 1;}
-    }
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 
-@media (max-width: $phone_width)
-{
-    a
-    {
-        display: inline-block;
-        padding: .2em .6em;
-        background: #ddd;
-        color: $color;
-        text-decoration: none;
-    }
+@media (max-width: $phone_width) {
+  a {
+    display: inline-block;
+    padding: 0.2em 0.6em;
+    background: #ddd;
+    color: $color;
+    text-decoration: none;
+  }
 }
 
 @import "components/App";
@@ -130,3 +143,11 @@ button,
 @import "components/GameMultiSelect";
 @import "components/GameAutoComplete";
 @import "components/GamePill";
+@import "components/EyeButton";
+@import "components/GameCardFreeSquare";
+@import "components/GameCard";
+@import "components/GameCardSettingsModal";
+@import "components/Modal";
+@import "components/FieldSet";
+@import "components/Slider";
+@import "components/GridPicker";

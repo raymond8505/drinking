@@ -138,7 +138,7 @@ class ComboCounter extends React.Component
 
     render()
     {
-        console.log(this.state);
+        //console.log(this.state);
 
         return (
             <aside className={`ComboCounter${this.state.animating ? ' ComboCounter--animating' : ' ComboCounter--animated'}${this.props.count === this.maxCombo ? ' ComboCounter--full' : ''}${this.props.count === 0 ? ' ComboCounter--empty' : ''}${this.state.open ? ' ComboCounter--open' : ' ComboCounter--closed'}`}>

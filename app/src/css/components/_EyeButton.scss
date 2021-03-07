@@ -1,0 +1,13 @@
+.EyeButton
+{
+    @include no-button-style;
+    padding: 0 .5em;
+}
+.Game--editing .EyeButton
+{
+    display: none;
+}
+.AddGameForm .EyeButton
+{
+    display: none;
+}

@@ -17,11 +17,13 @@ class RulesList extends React.Component
         games : PropTypes.object.isRequired,
         editRule : PropTypes.func.isRequired,
         deleteRule : PropTypes.func.isRequired,
-        getUser : PropTypes.func.isRequired 
+        getUser : PropTypes.func.isRequired,
+        hiddenGames : PropTypes.array 
     };
 
     static defaultProps =  {
-        recursive : false
+        recursive : false,
+        hiddenGames : []
     }
 
     filterField = React.createRef();
@@ -62,7 +64,9 @@ class RulesList extends React.Component
 
             let rule = this.rules[key];
 
-            if(this.ruleMatchesFilter(rule.rule))
+            
+
+            if(this.ruleMatchesFilter(rule.rule) && !this.props.hiddenGames.includes(rule.gameKey))
             {
                 return <RuleRow 
                     games={this.props.games}

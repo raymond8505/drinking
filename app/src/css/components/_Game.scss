@@ -1,109 +1,106 @@
-.Game
-{
-    display: flex;
-    flex-wrap: wrap;
+.Game {
+  display: flex;
+  flex-wrap: wrap;
 }
-.Game__rules
-{
-    width: 100%;
-    padding-bottom: 1em;
-    border-bottom: 1px solid $color;
+.Game__rules {
+  width: 100%;
+  padding-bottom: 1em;
+  border-bottom: 1px solid $color;
+}
+.Game__card-link {
+  font-weight: bold;
+  display: inline-block;
+  background-color: $green;
+  color: white !important;
+  text-decoration: none !important;
+  padding: 0.25em 0.6em;
+  border-radius: 4px;
+  float: right;
 }
 .Game__add-rules,
-.Game__child-games
-{
-    width: 50%;
-    padding: .5em;
-    flex-grow : 1;
-    flex-shrink : 1;
+.Game__child-games {
+  width: 50%;
+  padding: 0.5em;
+  flex-grow: 1;
+  flex-shrink: 1;
 }
-.Game section
-{
-    margin-bottom: 4em;
+.Game section {
+  margin-bottom: 4em;
 }
-.Game__rules .RulesList
-{
-    margin-bottom: 4em;
+.Game__rules .RulesList {
+  margin-bottom: 4em;
 }
 
-@media (max-width: $phone_width)
-{
-    .Game
-    {
-        display: block;
-    }
-    
-    .Game__add-rules,
-    .Game__child-games
-    {
-        width: 100%;
-    }
-}
-.Game__parent-change-select
-{
-    font-size: 1rem;
+@media (max-width: $phone_width) {
+  .Game {
+    display: block;
+  }
 
-    .EditButton,
-    .DeleteButton
-    {
-        padding: .3em;
-    }
-}
-.Game__title-value
-{
-    color: $color;
-}
-.Game__title-value
-{
-    float: left;
-}
-.Game__title
-{
+  .Game__add-rules,
+  .Game__child-games {
     width: 100%;
+  }
 }
-.Game__parent-delimiter
-{
-    display: inline-block;
-    padding: 0 .5em;
+.Game__parent-change-select {
+  font-size: 1rem;
+
+  .EditButton,
+  .DeleteButton {
+    padding: 0.3em;
+  }
 }
-.Game__parents
-{
-    position: relative;
-    display: flex;
-    align-items: flex-end;
-    padding: 0;
-    margin: 0;
-    
-    .Game:not(.Game--editing) &
-    {
-
-        font-size: .8em;
-    }
-
-    &,li
-    {
-        list-style: none;
-    }
-    
-    .GameAutoComplete__suggestions
-    {
-        bottom: none;
-        top: 1.5em;
-        background-color: $background_light;
-        width: 100%;
-        z-index: 999;
-    }
-
-    @media (max-width: $phone_width)
-    {
-        padding-left: $mobile_menu_toggle_width;
-        margin-top: 1em;
-    }
+.Game__title-value {
+  color: $color;
 }
-.Game:not(.Game--editing) .Game__parents .GamePill
-{
-    background-color: darken($background,8%);
+.Game__title-value {
+  float: left;
+}
+.Game__title {
+  width: 100%;
+  font-size: 3em;
+}
+.Game__parent-delimiter {
+  display: inline-block;
+  padding: 0 0.5em;
+}
+.Game__parents {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  padding: 0;
+  margin: 0;
+  margin-top: 1em;
+
+  .Game:not(.Game--editing) & {
+    font-size: 0.9em;
+  }
+
+  &,
+  li {
+    list-style: none;
+  }
+
+  .GameAutoComplete__suggestions {
+    bottom: none;
+    top: 1.5em;
+    background-color: $background_light;
+    width: 100%;
+    z-index: 999;
+  }
+
+  @media (max-width: $phone_width) {
+    padding-left: $mobile_menu_toggle_width;
+    margin-top: 1em;
+  }
+}
+.Game:not(.Game--editing) .Game__parents .GamePill {
+  background-color: darken($background, 8%);
+  //border: 1px solid darken($background,16%);
+  color: $color;
+  margin-left: 0;
+  margin-right: 0.8em;
+
+  .EyeButton {
     color: $color;
-    margin-left: 0;
-    margin-right: .8em;
+  }
 }

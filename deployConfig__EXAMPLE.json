@@ -1,0 +1,19 @@
+{
+    "localPaths": [
+        {
+            "local": "./",
+            "remote": "/"
+        }
+    ],
+    "blacklist": [
+        "node_modules",
+        "recipe-search",
+        "deploy.js"
+    ],
+    "lastUpdate": -1,
+    "credentials" : {
+      "user" : "",
+      "pass" : "",
+      "host" : ""
+    }
+}

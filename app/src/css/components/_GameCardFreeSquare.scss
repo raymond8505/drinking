@@ -1,0 +1,10 @@
+.GameCardFreeSquare__settings-btn {
+  @include no-button-style;
+  color: $color;
+  cursor: pointer;
+
+  &:hover {
+    background-color: transparent;
+    color: $green;
+  }
+}
