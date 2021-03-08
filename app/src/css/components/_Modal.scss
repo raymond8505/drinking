@@ -1,7 +1,7 @@
 .Modal {
   display: none;
   text-align: left;
-
+  padding: 0;
   position: fixed;
   width: 100vw;
   height: 100vh;
@@ -38,6 +38,13 @@
   padding: 2em;
   padding-top: 0;
   width: 80%;
+
+  @include mobile-only {
+    width: 100%;
+    max-width: none;
+    max-height: 100vh;
+  }
+
   box-shadow: 0 0 5vw 0 black;
   overflow: auto;
   color: $color;
@@ -49,6 +56,8 @@
   top: 0;
   padding-bottom: 1em;
   padding-top: 2em;
+  background-color: $background;
+  z-index: 2;
 }
 .Modal__title {
   margin: 0;

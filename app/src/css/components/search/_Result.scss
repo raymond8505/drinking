@@ -1,0 +1,26 @@
+.Result {
+  min-height: 25vh;
+  background: $background;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.Result a {
+  @include no-decoration;
+  @include animated;
+
+  color: $color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  padding: 1vmin;
+  h2 {
+    font-weight: bold;
+  }
+  &:hover {
+    color: white;
+    background-color: $green;
+  }
+}

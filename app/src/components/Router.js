@@ -27,8 +27,13 @@ class Router extends React.Component {
           />
           <Route
             exact
-            path="/"
+            path="/cms"
             render={(props) => <App {...props} mode="games" />}
+          />
+          <Route
+            exact
+            path="/"
+            render={(props) => <App {...props} mode="drinko" />}
           />
           <Route component={NotFound} />
         </Switch>

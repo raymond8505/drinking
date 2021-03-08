@@ -121,6 +121,12 @@ button,
   }
 }
 
+@mixin mobile-only {
+  @media (max-width: 820px) {
+    @content;
+  }
+}
+
 @import "components/App";
 @import "components/GameListItem";
 @import "components/GameList";
@@ -151,3 +157,5 @@ button,
 @import "components/FieldSet";
 @import "components/Slider";
 @import "components/GridPicker";
+@import "components/search/Index";
+@import "components/search/Result";

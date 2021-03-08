@@ -2,7 +2,11 @@
   display: flex;
   justify-content: flex-end;
   margin-top: 1em;
-
+  position: sticky;
+  bottom: -2em;
+  padding-bottom: 2em;
+  padding-top: 1em;
+  background-color: $background;
   > * {
     padding: 0.4em 1em;
     &:not(:first-child) {
@@ -28,6 +32,7 @@
   margin: 1em 0;
   padding: 0;
   display: flex;
+
   justify-content: space-between;
   flex-wrap: wrap;
 
@@ -35,7 +40,24 @@
     margin-bottom: 0.5em;
     width: 48%;
   }
+
+  @include mobile-only {
+    @media (orientation: portrait) {
+      display: block;
+
+      li {
+        width: auto;
+        font-size: 1.5em;
+      }
+    }
+  }
 }
 .GameCardSettingsModal__grid-size {
   width: 50%;
+
+  @include mobile-only {
+    @media (orientation: portrait) {
+      width: 100%;
+    }
+  }
 }

@@ -13,6 +13,7 @@ import Signup from "./Signup";
 import { GENERAL_RULES_KEY, RAYMOND_UID } from "../constants";
 import ShortCutsModal from "./ShortCutsModal";
 import { Link } from "react-router-dom";
+import SearchIndex from "./search/Index";
 
 class App extends React.Component {
   state = {
@@ -198,33 +199,6 @@ class App extends React.Component {
         }
 
         this.setState({ loading: false });
-
-        //the first time tha games sync, check if any parent_game keys are strings and make them arrays.
-
-        // if(!this.state.gamesInited)
-        // {
-        //     let games = {...this.state.games};
-
-        //     this.data.forEach((key)=>{
-
-        //         let game = games[key];
-
-        //         if(typeof game['parent_game'] == 'string')
-        //         {
-        //             games[key]['parent_game'] = [game['parent_game']];
-        //         }
-
-        //         if(games[key].parent_game && !games[key].parent_game.includes(GENERAL_RULES_KEY))
-        //         {
-        //             games[key].parent_game.push(GENERAL_RULES_KEY);
-        //         }
-        //     },games);
-
-        //     this.setState({
-        //         games : games,
-        //         gamesInited : true
-        //     });
-        // }
       },
     });
 
@@ -240,14 +214,6 @@ class App extends React.Component {
   };
 
   canEditGame = (gameKey) => {
-    /* console.log('======================CHECKING CAN EDIT');
-        console.log(game);
-        
-        console.table({
-            'state user id' : this.state.user.uid,
-            'raymond user id' : this.RAYMOND_UID,
-            'game owner' : game.owner
-        }); */
     let game =
       typeof gameKey === "string" ? this.data.getGameByKey(gameKey) : gameKey;
 
@@ -706,6 +672,9 @@ class App extends React.Component {
           this.props.history.push("/");
         }
 
+        break;
+      case "drinko":
+        view = <SearchIndex games={this.state.games} />;
         break;
       case "game":
       default:

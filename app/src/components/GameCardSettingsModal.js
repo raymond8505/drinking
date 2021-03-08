@@ -27,6 +27,7 @@ const GameCardSettingsModal = ({
 
   const onApplyClick = (e) => {
     onApply(settings);
+    onClose();
   };
 
   const findParentSettingsIndex = (key) =>
@@ -66,19 +67,22 @@ const GameCardSettingsModal = ({
           <ul className="GameCardSettingsModal__parent-rules-sliders">
             {parents.map((parent, i) => {
               return (
-                <li key={i}>
-                  <Slider
-                    title={parent.title}
-                    startingValue={
-                      settings.parents.find((p) => p.key === parent.gameKey)
-                        .ratio
-                    }
-                    max={5}
-                    onChange={(val) => {
-                      updateParentRatio(parent.gameKey, val);
-                    }}
-                  />
-                </li>
+                parent.rules &&
+                Object.keys(parent.rules).length > 0 && (
+                  <li key={i}>
+                    <Slider
+                      title={parent.title}
+                      startingValue={
+                        settings.parents.find((p) => p.key === parent.gameKey)
+                          .ratio
+                      }
+                      max={5}
+                      onChange={(val) => {
+                        updateParentRatio(parent.gameKey, val);
+                      }}
+                    />
+                  </li>
+                )
               );
             })}
           </ul>

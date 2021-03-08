@@ -49,7 +49,11 @@
 }
 
 .rule-box:not(.rule-box--free) .rule-box__rule {
-  font-size: 0.9em;
+  font-size: 1.2em;
+
+  @media (max-width: 1440px) {
+    font-size: 0.9em;
+  }
 }
 .header-box {
   font-size: 2rem;
@@ -65,4 +69,43 @@
 .rule-box--game-rule:not(.rule-box--highlighted) .rule-box__game-title {
   font-weight: bold;
   color: $red;
+}
+.App--GameCard {
+  overflow: auto;
+}
+@include mobile-only {
+  .GameCard {
+    gap: 1px;
+  }
+  .rule-box__drinks {
+    font-size: 1em;
+  }
+  .rule-box {
+    padding: 2px;
+  }
+
+  .GameCardFreeSquare {
+    h1,
+    h2 {
+      font-size: 1em;
+    }
+  }
+  .App--GameCard .App--mobile {
+    padding-top: 0;
+  }
+
+  .App--GameCard {
+    font-size: 0.7rem;
+
+    .header-box {
+      position: sticky;
+      top: 0;
+    }
+  }
+
+  @media (orientation: portrait) {
+    .App--GameCard {
+      font-size: 0.45em;
+    }
+  }
 }

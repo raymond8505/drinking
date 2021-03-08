@@ -14,7 +14,7 @@ const GameCard = ({ games, currentIndex }) => {
 
   const parents = data.getParentGames(game);
 
-  const [settings, setSettings] = useState({
+  const defaultSettings = {
     parents: parents.map((parent) => {
       return {
         key: parent.gameKey,
@@ -22,9 +22,17 @@ const GameCard = ({ games, currentIndex }) => {
       };
     }),
     grid: [5, 5],
-  });
+  };
 
-  document.body.style.overflow = "auto";
+  let savedSettings = window.localStorage.getItem(currentIndex);
+
+  if (savedSettings !== null) {
+    savedSettings = JSON.parse(savedSettings);
+  }
+
+  const [settings, setSettings] = useState(savedSettings || defaultSettings);
+
+  document.body.classList.add("App--GameCard");
 
   function pickparentGames(gRules, numToPick, picked = []) {
     if (gRules.length === 0) return picked;
@@ -55,17 +63,28 @@ const GameCard = ({ games, currentIndex }) => {
     //shuffle the game rules and pick half
     let gameRules = shuffle(
       data.rulesObjectToArray(data.getGameRules(currentIndex, false))
-    ).map((r) => {
-      const { rule, drinks } = r;
+    );
 
-      return {
-        id: r.ruleKey,
-        rule,
-        drinks,
-        game,
-      };
-    });
-    gameRules = gameRules.slice(0, Math.ceil(gameRules.length / 2));
+    //pick half the game rules
+    gameRules = gameRules
+      .slice(
+        0,
+        Math.min(
+          Math.ceil(gameRules.length / 2),
+          Math.floor((settings.grid[0] * settings.grid[1]) / 2)
+        )
+      )
+      .map((r) => {
+        const { rule, drinks } = r;
+
+        //create gameboard rule objects from all rules
+        return {
+          id: r.ruleKey,
+          rule,
+          drinks,
+          game,
+        };
+      });
 
     //get the parent games' rules in an object
     const parentGames = {};
@@ -79,9 +98,10 @@ const GameCard = ({ games, currentIndex }) => {
     let ruleIndexes = [];
 
     settings.parents.forEach((p, i) => {
-      for (let r = 0; r < p.ratio; r++) {
-        ruleIndexes.push(p.key);
-      }
+      if (parentGames[p.key] && parentGames[p.key].length > 0)
+        for (let r = 0; r < p.ratio; r++) {
+          ruleIndexes.push(p.key);
+        }
     });
 
     //calc the number of parent rules to add (grid area - num game rules - 1 free space)
@@ -152,35 +172,6 @@ const GameCard = ({ games, currentIndex }) => {
       rules = shuffle(rules);
     }
     setCardRules(rules);
-    // const rules = shuffle(
-    //   pickparentGames(
-    //     parentGames,
-    //     settings.grid.reduce((prev, cur) => cur * prev, 1) -
-    //       gameRules.length -
-    //       1
-    //   )
-    //     .concat(gameRules)
-    //     .map((r) => {
-    //       return { ...r, game: data.getGameByKey(r.gameKey) };
-    //     })
-    // );
-
-    // rules.push({
-    //   id: "free",
-    //   rule: (
-    //     <GameCardFreeSquare
-    //       title={game.title}
-    //       subtitle="Drinking Bingo"
-    //       onCogClick={(e) => {
-    //         console.log("open settings");
-    //         setSettingsOpen(true);
-    //       }}
-    //     />
-    //   ),
-    //   highlighted: true,
-    // });
-
-    // setCardRules(shuffle(rules));
   }, [currentIndex, settings]);
 
   const highlightRule = (i) => {
@@ -196,8 +187,14 @@ const GameCard = ({ games, currentIndex }) => {
 
   const onSettingsChange = (newSettings) => {
     setSettings({ ...newSettings });
+
+    window.localStorage.setItem(currentIndex, JSON.stringify(newSettings));
   };
 
+  /**
+   * Outputs the given number of header squares
+   * @param {Int} num
+   */
   const outputHeader = (num) => {
     return [
       <div key={`b`} className="header-box header-box--b">
@@ -218,13 +215,18 @@ const GameCard = ({ games, currentIndex }) => {
     ].filter((l, i) => i < num);
   };
 
+  const columnSize =
+    window.innerWidth < 820 ? `${100 * (1 / settings.grid[1])}%` : "1fr";
+
+  const columnTemplate = `repeat(${settings.grid[1]},${columnSize})`;
+
   return (
     <>
       <div
-        className="GameCard"
+        className={`GameCard GameCard--${settings.grid[0]}-rows GameCard--${settings.grid[1]}-cols`}
         style={{
-          gridTemplateRows: `auto repeat(${settings.grid[0] - 1},1fr)`,
-          gridTemplateColumns: `repeat(${settings.grid[1]},1fr)`,
+          gridTemplateRows: `4rem repeat(${settings.grid[0] - 1},auto)`,
+          gridTemplateColumns: columnTemplate,
         }}
       >
         {outputHeader(settings.grid[1])}
@@ -261,6 +263,9 @@ const GameCard = ({ games, currentIndex }) => {
           );
         })}
       </div>
+      <a href="/" className="GameCard__return-link">
+        <i className="fa fa-sign-out"></i>
+      </a>
       <GameCardSettingsModal
         open={settingsOpen}
         onClose={() => {

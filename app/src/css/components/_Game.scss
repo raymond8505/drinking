@@ -104,3 +104,15 @@
     color: $color;
   }
 }
+.header-box__back-btn {
+  display: none;
+}
+.GameCard__return-link {
+  display: inline-block;
+  position: absolute;
+  top: 1vmin;
+  right: 1vmin;
+  font-size: 2em;
+  background-color: transparent !important;
+  color: white !important;
+}

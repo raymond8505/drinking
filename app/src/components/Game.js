@@ -258,7 +258,7 @@ class Game extends React.Component {
         <a
           href={`/game/${this.props.index}/card`}
           className="Game__card-link"
-          target="_blank"
+          target={`${window.innerWidth <= 820 ? "_self" : "_blank"}`}
         >
           Play {game.title} BINGO
         </a>

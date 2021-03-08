@@ -102,6 +102,9 @@ class DataHelper {
 
     this.forEach((key) => {
       var obj = collection[key];
+
+      if (obj === undefined) return;
+
       obj[keyFieldName] = key;
 
       arr.push(obj);

@@ -8,3 +8,10 @@
     color: $green;
   }
 }
+.GameCardFreeSquare {
+  @include mobile-only {
+    .fa-cog {
+      font-size: 20px;
+    }
+  }
+}
